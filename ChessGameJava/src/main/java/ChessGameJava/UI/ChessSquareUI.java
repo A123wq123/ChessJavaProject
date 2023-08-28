@@ -3,12 +3,14 @@ package ChessGameJava.UI;
 
 import ChessGameJava.Controller.ChessController;
 import ChessGameJava.Utility.Position;
+import ChessGameJava.Utility.UiChange;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.lang.String;
+import java.util.ArrayList;
 
 /**
  * Class representing a chess square on the User Interface side of this project. This class is
@@ -63,9 +65,9 @@ public class ChessSquareUI extends JLabel implements MouseListener {
     @Override
     public void mouseClicked(MouseEvent e) {
         System.out.println("Coordinates of square: x = " + position.getCoordX() + " y = " + position.getCoordY());
-        this.controller.executeMove(position);
+        ArrayList<UiChange> changes = this.controller.processClick(position);
 
-        
+        e.getComponent().getParent().
     }
 
     /**

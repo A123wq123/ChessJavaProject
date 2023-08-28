@@ -1,7 +1,10 @@
 package ChessGameJava.Logic.Moves;
 
+import java.util.ArrayList;
+
 import ChessGameJava.Logic.ChessBoardModel;
 import ChessGameJava.Logic.ChessSquareModel;
+import ChessGameJava.Utility.UiChange;
 
 /**
  * Abstract class that describes the functions every move should follow. Notably, the functions to execute a move and revert
@@ -19,7 +22,7 @@ public abstract class ChessABSMove {
      * This method must be overriden in child classes. It should execute a move on the provided ChessBoardModel.
      * @param board the ChessBoardModel we want to execute the move on
      */
-    abstract public void executeMove(ChessBoardModel board);
+    abstract public ArrayList<UiChange> executeMove(ChessBoardModel board);
 
     /**
      * This method must be overriden in child classes. It should revert a move that was made during the execution

@@ -3,6 +3,7 @@ package ChessGameJava.UI;
 import javax.swing.*;
 
 import ChessGameJava.Controller.ChessController;
+import ChessGameJava.Utility.UiChange;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -38,6 +39,12 @@ public class ChessBoardUI extends JFrame{
         this.addPieces();
 
         super.setVisible(true);
+    }
+
+    public void makeChanges(ArrayList<UiChange> changes) {
+        for(UiChange change: changes) {
+            this.getSquareUI(change.position)
+        }
     }
 
     /**
