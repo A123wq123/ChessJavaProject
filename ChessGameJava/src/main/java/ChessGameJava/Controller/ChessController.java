@@ -24,8 +24,9 @@ public class ChessController {
 
     public ChessController() {
         board = new ChessBoardModel();
-        // Input here the board game mode? Or maybe add a function down the line that can do this but with more
-        // options.
+        firstSquare = null;
+        secondSquare = null;
+        currentPlayer = Colour.WHITE;
     }
 
     /**
@@ -52,39 +53,15 @@ public class ChessController {
             this.firstSquare = click;
             ChessSquareModel selectedSquare = board.getSquareModel(click);
             for (ChessABSMove move : selectedSquare.getPiece().getListMoves(selectedSquare)) {
-                listChanges.add(createUiChange(move, true));
+                // Might need to further filter the moves depending on like a game mode. 
+                // The idea being that a piece returns the moves it can do but has no knowledge of the game mode. 
+                // A great example is checkmate vrs est all. in eat all a move is valid even if it puts the king 
+                // in check which is NOT the case of checkmate. 
+                listChanges.add(new UiChange(move.getSecondSquare().getPosition(), move.getFirstSquare().getPiece(), true));
             }
         }
 
         return listChanges;
-    }
-
-    /**
-     * This method creates the UiCHange associated with a given move and a boolean that indicates if this
-     * is a possible move we have not yet executed. 
-     * @param move
-     * @param isPossibleMove
-     * @return The associated UiChange instance. 
-     */
-    private UiChange createUiChange(ChessABSMove move, boolean isPossibleMove) {
-        ChessSquareModel destination = move.getSecondSquare();
-        UiChange.PIECENAME pieceName = getPieceName(destination.getPiece());
-
-        return new UiChange(destination.getPosition(), pieceName, destination.getPiece().getColour(), isPossibleMove);
-    }
-
-    /**
-     * This function is in charge of mapping a provided piece to one of the valid UiChange.PIECENAME, this is 
-     * to decouple the UI from the logic and not have them hold direct pieces but morse so only what they represent.
-     * @param piece the piece we want to map.
-     * @return The associated UiChange.PIECENAME
-     */
-    private UiChange.PIECENAME getPieceName(ChessABSPieceModel piece) {
-        if (piece instanceof King) {
-            return UiChange.PIECENAME.KING;
-        }
-
-        return UiChange.PIECENAME.NULL;
     }
 
     /**

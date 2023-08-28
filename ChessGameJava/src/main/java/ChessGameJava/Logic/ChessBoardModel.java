@@ -1,6 +1,7 @@
 package ChessGameJava.Logic;
 
 import ChessGameJava.Logic.Pieces.ChessABSPieceModel;
+import ChessGameJava.Logic.Pieces.King;
 import ChessGameJava.Utility.Position;
 import java.util.Objects;
 
@@ -19,7 +20,7 @@ public class ChessBoardModel {
     private ChessSquareModel positionOfWhiteKing;
     private ChessSquareModel positionOfBlackKing;
 
-    /** TODO
+    /** 
      * Constructor of a ChessBoardModel, this initiates every square and also every
      * piece present in the chess board.
      */
@@ -29,6 +30,8 @@ public class ChessBoardModel {
                 squareList[row][column] = new ChessSquareModel(column, row);
             }
         }
+
+        this.addPieces();
     }
 
     /**
@@ -77,6 +80,14 @@ public class ChessBoardModel {
     public boolean isKingUnderAttack(Colour colourOfAttacker) {
         // To check if the kind is under attack.
         return true;
+    }
+
+    /**
+     * This method is used to initialize a board with its pieces. 
+     */
+    private void addPieces() {
+        ChessSquareModel square = getSquareModel(new Position(7, 4));
+        square.addPiece(new King(this, Colour.WHITE));
     }
 
     /**

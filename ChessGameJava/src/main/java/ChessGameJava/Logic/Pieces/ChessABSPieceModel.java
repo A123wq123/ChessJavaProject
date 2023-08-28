@@ -34,13 +34,12 @@ public abstract class ChessABSPieceModel {
     }
 
     /** TODO
-     * Method that checks if a move is legal. but doesn't check if the move puts
-     * the players king in check.
+     * Method that checks if the move would be attacking a piece of the same colour.
      * @param currentPos the position the move starts at.
      * @param destSquare the position the move ends at.
-     * @return boolean indicating if the move is legal.
+     * @return boolean indicating if we are attacking a piece of the same colour.
      */
-    protected boolean checkIfMoveLegal(ChessSquareModel currentPos, ChessSquareModel destSquare) {
-        return !(this.colour.equals(destSquare.getPiece().colour));
+    protected boolean checkIfMoveAttacksSameColour(ChessSquareModel currentPos, ChessSquareModel destSquare) {
+        return this.colour.equals(destSquare.getPiece().colour);
     }
 }

@@ -3,7 +3,9 @@ package ChessGameJava.Logic.Pieces;
 import ChessGameJava.Logic.ChessBoardModel;
 import ChessGameJava.Logic.ChessSquareModel;
 import ChessGameJava.Logic.Colour;
+import ChessGameJava.Logic.Moves.BasicMove;
 import ChessGameJava.Logic.Moves.ChessABSMove;
+import ChessGameJava.Utility.Position;
 
 import java.util.ArrayList;
 
@@ -21,6 +23,7 @@ public class King extends ChessABSPieceModel {
      * @param colourOfPiece the colour of the king.
      */
     public King(ChessBoardModel board, Colour colourOfPiece) {
+        super();
         this.board = board;
         this.colour = colourOfPiece;
     }
@@ -34,27 +37,26 @@ public class King extends ChessABSPieceModel {
      */
     @Override
     public ArrayList<ChessABSMove> getListMoves(ChessSquareModel currentSquare) {
+        ArrayList<ChessABSMove> listOfMoves = new ArrayList<>();
+        Position currentPosition = currentSquare.getPosition();
 
-        return null;
+        for (int rowMove : new int[] {-1, 0, 1}) {
+            for (int columnMove : new int[] {-1, 0, 1}) {
+                ChessSquareModel destSquare;
+                try {
+                    destSquare = this.board.getSquareModel(currentPosition.sumPosition(rowMove, columnMove));
+                } catch (Exception e) {
+                    destSquare = null;
+                }
 
-        // ArrayList<ChessSquareModel> listOfMoves = new ArrayList<>();
-        // Position currentPosition = currentSquare.getPosition();
+                if(destSquare != null) {
+                    if (!checkIfMoveAttacksSameColour(currentSquare, destSquare)) {
+                        listOfMoves.add(new BasicMove(currentSquare, destSquare));
+                }
+                }
+            }
+        }
 
-        // for (int rowMove : new int[] {-1, 0, 1}) {
-        //     for (int columnMove : new int[] {-1, 0, 1}) {
-        //         Position destPosition;
-        //         try {
-        //             destPosition = currentPosition.sumPosition(rowMove, columnMove);
-        //         } catch (Exception e) {
-        //             continue;
-        //         }
-        //         ChessSquareModel destSquare = this.board.getSquareModel(destPosition);
-        //         if (checkIfMoveLegal(currentSquare, destSquare)) {
-        //             listOfMoves.add(destSquare);
-        //         }
-        //     }
-        // }
-
-        // return listOfMoves;
+        return listOfMoves;
     }
 }

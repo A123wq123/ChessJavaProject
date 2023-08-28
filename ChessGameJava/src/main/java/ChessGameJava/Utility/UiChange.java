@@ -1,6 +1,8 @@
 package ChessGameJava.Utility;
 
 import ChessGameJava.Logic.Colour;
+import ChessGameJava.Logic.Pieces.ChessABSPieceModel;
+import ChessGameJava.Logic.Pieces.King;
 
 /**
  * This class represents a given change that needs to be made to the UI of the application. In short, 
@@ -22,10 +24,10 @@ public class UiChange {
      * @param isPossibleMove If true, then highlight the square as a move we can do but do not execute it. 
      *                       If false then make the change on the UI. 
      */
-    public UiChange(Position pos, PIECENAME name,Colour colour, boolean isPossibleMove) {
+    public UiChange(Position pos, ChessABSPieceModel piece, boolean isPossibleMove) {
         this.position = pos;
-        this.pieceName = name;
-        this.colour = colour;
+        this.pieceName = this.getNameFromABSPice(piece);
+        this.colour = piece.getColour();
         this.isHighlightedMove = isPossibleMove;
     }
 
@@ -53,6 +55,14 @@ public class UiChange {
      * @return The isHighlightedMove boolean. 
      */
     public boolean getIsHighlightedMove() { return this.isHighlightedMove; }
+
+    public PIECENAME getNameFromABSPice(ChessABSPieceModel piece) {
+        if(piece instanceof King) {
+            return PIECENAME.KING;
+        } else {
+            return PIECENAME.NULL;
+        }
+    }
 
     /**
      * Enum of all the possible piece we can be. 

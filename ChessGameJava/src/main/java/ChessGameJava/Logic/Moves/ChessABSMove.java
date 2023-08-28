@@ -29,7 +29,7 @@ public abstract class ChessABSMove {
      * of the executeMove method. If the move was not executed, it should do nothing. 
      * @param board the ChessBoardModel we want to revert the move on. 
      */
-    abstract public void revertMove(ChessBoardModel board);
+    abstract public ArrayList<UiChange> revertMove(ChessBoardModel board);
 
     /**
      * Getter for the first square, the square where the piece is currently at.

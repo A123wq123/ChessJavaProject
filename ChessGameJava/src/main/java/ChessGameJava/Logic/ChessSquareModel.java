@@ -62,4 +62,10 @@ public class ChessSquareModel {
     public void changePosition(Position newPosition) {
         position = newPosition;
     }
+
+    public ChessSquareModel copy() {
+        ChessSquareModel copy = new ChessSquareModel(this.position.getCoordY(), this.position.getCoordX());
+        copy.addPiece(this.getPiece());
+        return copy;
+    }
 }
