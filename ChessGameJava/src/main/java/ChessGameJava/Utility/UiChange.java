@@ -29,7 +29,30 @@ public class UiChange {
         this.isHighlightedMove = isPossibleMove;
     }
 
-    public getColour() { return this.colour; }
+    /**
+     * Getter for the position argument. 
+     * @return The position of the change. 
+     */
+    public Position getPosition() { return this.position; }
+
+    /**
+     * Getter for the piece name attribute.
+     * @return The piece name attribute.
+     */
+    public PIECENAME getPieceName() { return this.pieceName; }
+
+    /**
+     * Getter for the colour of the piece. 
+     * @return The colour of the piece. 
+     */
+    public Colour getColour() { return this.colour; }
+
+    /**
+     * Getter for the isHighlightedMove boolean. If true then the move should get displayed as
+     * a possible move on teh screen, if false then simply execute the move and make the change. 
+     * @return The isHighlightedMove boolean. 
+     */
+    public boolean getIsHighlightedMove() { return this.isHighlightedMove; }
 
     /**
      * Enum of all the possible piece we can be. 
