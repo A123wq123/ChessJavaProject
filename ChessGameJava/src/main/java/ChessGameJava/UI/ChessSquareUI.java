@@ -23,9 +23,9 @@ import java.util.ArrayList;
  */
 public class ChessSquareUI extends JLabel implements MouseListener {
 
-    Position position;
-    String pieceName;
-    ChessController controller;
+    public Position position;
+    public String pieceName;
+    private ChessController controller;
 
     /**
      * Constructor of a ChessSquareUI component. Sets every variable necessary for proper ui
@@ -64,10 +64,9 @@ public class ChessSquareUI extends JLabel implements MouseListener {
      */
     @Override
     public void mouseClicked(MouseEvent e) {
-        System.out.println("Coordinates of square: x = " + position.getCoordX() + " y = " + position.getCoordY());
         ArrayList<UiChange> changes = this.controller.processClick(position);
 
-        e.getComponent().getParent().
+        ((ChessBoardUI) e.getComponent().getParent()).makeChanges(changes);
     }
 
     /**
@@ -114,5 +113,23 @@ public class ChessSquareUI extends JLabel implements MouseListener {
     @Override
     public void mouseExited(MouseEvent e) {
 
+    }
+
+    /**
+     * Highlights a the current square by changing its colour. 
+     */
+    public void highlight() {
+        this.setBackground(Color.GRAY);
+    }
+
+    /**
+     * Removes the highlight on a square by changing back its colour. 
+     */
+    public void removeHighlight() {
+        if ((position.sumCoordinates())%2 == 0) {
+            this.setBackground(Color.WHITE);
+        } else {
+            this.setBackground(Color.LIGHT_GRAY);
+        }
     }
 }
