@@ -15,7 +15,7 @@ public class BasicMove extends ChessABSMove{
         this.firstSquare = firstSquare;
         this.secondSquare = secondSquare;
         this.moveWasExecuted = false;
-        this.temp = secondSquare.copy();
+        this.temp = new ChessSquareModel(secondSquare.getPosition().getCoordX(), secondSquare.getPosition().getCoordY());
     }
 
     @Override

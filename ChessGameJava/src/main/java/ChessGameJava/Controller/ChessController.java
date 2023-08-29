@@ -39,6 +39,7 @@ public class ChessController {
             this.secondSquare = click;
 
             ChessABSMove validMove = this.isMoveValid();
+            System.out.println(validMove);
             if (validMove != null) {
                 listChanges = validMove.executeMove(board);
                 this.currentPlayer = this.currentPlayer == Colour.BLACK ? Colour.WHITE : Colour.BLACK;
@@ -90,6 +91,7 @@ public class ChessController {
             if(validMove != null) {
                 validMove.executeMove(board);
                 if(board.isKingUnderAttack(currentPlayer == Colour.BLACK ? Colour.WHITE : Colour.BLACK)) {
+                    System.out.println("King is under attack?!");
                     validMove.revertMove(board);
                     validMove = null;
                 } else {
