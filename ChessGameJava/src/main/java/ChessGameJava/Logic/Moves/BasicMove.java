@@ -32,8 +32,8 @@ public class BasicMove extends ChessABSMove{
         this.moveWasExecuted = true;
 
         // Get the changes
-        listChanges.add(new UiChange(this.firstSquare.getPosition(), this.firstSquare.getPiece(), moveWasExecuted));
-        listChanges.add(new UiChange(this.temp.getPosition(), this.temp.getPiece(), moveWasExecuted));
+        listChanges.add(new UiChange(this.firstSquare.getPosition(), this.firstSquare.getPiece(), false));
+        listChanges.add(new UiChange(this.temp.getPosition(), this.temp.getPiece(), false));
 
         return listChanges;
     }

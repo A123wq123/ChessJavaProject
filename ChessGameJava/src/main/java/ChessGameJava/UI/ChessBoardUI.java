@@ -58,6 +58,7 @@ public class ChessBoardUI extends JFrame{
                 square.highlight();
             } else {
                 square.pieceName = this.getPieceName(change.getPieceName(), change.getColour());
+                square.setText(square.pieceName);
             }
         }
     }
@@ -85,7 +86,7 @@ public class ChessBoardUI extends JFrame{
             case NULL:
                 return null;
         }
-        return null;
+        return "";
     }
 
     /**

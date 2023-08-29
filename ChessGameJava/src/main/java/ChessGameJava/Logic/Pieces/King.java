@@ -40,7 +40,6 @@ public class King extends ChessABSPieceModel {
         ArrayList<ChessSquareModel> listSquares = this.getListAttackingSquares(currentSquare);
         ArrayList<ChessABSMove> listMoves = new ArrayList<>();
         for (ChessSquareModel destSquare : listSquares) {
-            System.out.println(String.format("x: %s, y: %s", destSquare.getPosition().getCoordX(), destSquare.getPosition().getCoordY()));
             if(!checkIfMoveAttacksSameColour(currentSquare, destSquare)) {
                 listMoves.add(new BasicMove(currentSquare, destSquare));
             }

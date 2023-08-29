@@ -51,7 +51,7 @@ public class UiChange {
 
     /**
      * Getter for the isHighlightedMove boolean. If true then the move should get displayed as
-     * a possible move on teh screen, if false then simply execute the move and make the change. 
+     * a possible move on the screen, if false then simply execute the move and make the change. 
      * @return The isHighlightedMove boolean. 
      */
     public boolean getIsHighlightedMove() { return this.isHighlightedMove; }

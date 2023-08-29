@@ -35,9 +35,6 @@ public class ChessController {
     public ArrayList<UiChange> processClick(Position click) {
         ArrayList<UiChange> listChanges = new ArrayList<UiChange>();
 
-        board.printBoard();
-        System.out.println("-------------------------------------------------------------");
-
         if (this.firstSquare != null) {
             this.secondSquare = click;
 
