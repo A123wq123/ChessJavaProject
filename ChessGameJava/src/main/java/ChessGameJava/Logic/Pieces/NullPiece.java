@@ -28,7 +28,12 @@ public class NullPiece extends ChessABSPieceModel {
      * @return the list of moves the piece is capable of doing.
      */
     @Override
-    public ArrayList<ChessABSMove> getListMoves(ChessSquareModel currentPos) {
-        return null;
+    public ArrayList<ChessABSMove> getListMoves(ChessSquareModel currentSquare) {
+        return new ArrayList<>();
+    }
+
+    @Override
+    public ArrayList<ChessSquareModel> getListAttackingSquares(ChessSquareModel currentSquare) {
+        return new ArrayList<>();
     }
 }

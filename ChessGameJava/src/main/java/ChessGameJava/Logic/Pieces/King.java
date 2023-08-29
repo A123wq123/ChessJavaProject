@@ -37,26 +37,38 @@ public class King extends ChessABSPieceModel {
      */
     @Override
     public ArrayList<ChessABSMove> getListMoves(ChessSquareModel currentSquare) {
-        ArrayList<ChessABSMove> listOfMoves = new ArrayList<>();
+        ArrayList<ChessSquareModel> listSquares = this.getListAttackingSquares(currentSquare);
+        ArrayList<ChessABSMove> listMoves = new ArrayList<>();
+        for (ChessSquareModel destSquare : listSquares) {
+            System.out.println(String.format("x: %s, y: %s", destSquare.getPosition().getCoordX(), destSquare.getPosition().getCoordY()));
+            if(!checkIfMoveAttacksSameColour(currentSquare, destSquare)) {
+                listMoves.add(new BasicMove(currentSquare, destSquare));
+            }
+        }
+
+        // TODO Add moves related to castleing. 
+
+        return listMoves;
+    }
+
+    @Override
+    public ArrayList<ChessSquareModel> getListAttackingSquares(ChessSquareModel currentSquare) {
+        ArrayList<ChessSquareModel> listSquares = new ArrayList<>();
         Position currentPosition = currentSquare.getPosition();
 
         for (int rowMove : new int[] {-1, 0, 1}) {
             for (int columnMove : new int[] {-1, 0, 1}) {
-                ChessSquareModel destSquare;
                 try {
-                    destSquare = this.board.getSquareModel(currentPosition.sumPosition(rowMove, columnMove));
+                    Position position = currentPosition.sumPosition(rowMove, columnMove);
+                    if(!position.equals(currentPosition)) {
+                        listSquares.add(this.board.getSquareModel(position));
+                    }
                 } catch (Exception e) {
-                    destSquare = null;
-                }
-
-                if(destSquare != null) {
-                    if (!checkIfMoveAttacksSameColour(currentSquare, destSquare)) {
-                        listOfMoves.add(new BasicMove(currentSquare, destSquare));
-                }
+                    continue;
                 }
             }
         }
 
-        return listOfMoves;
+        return listSquares;
     }
 }

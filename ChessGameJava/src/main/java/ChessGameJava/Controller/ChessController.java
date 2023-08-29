@@ -7,8 +7,6 @@ import ChessGameJava.Logic.ChessBoardModel;
 import ChessGameJava.Logic.ChessSquareModel;
 import ChessGameJava.Logic.Colour;
 import ChessGameJava.Logic.Moves.ChessABSMove;
-import ChessGameJava.Logic.Pieces.ChessABSPieceModel;
-import ChessGameJava.Logic.Pieces.King;
 import ChessGameJava.Utility.Position;
 import ChessGameJava.Utility.UiChange;
 
@@ -36,6 +34,9 @@ public class ChessController {
      */
     public ArrayList<UiChange> processClick(Position click) {
         ArrayList<UiChange> listChanges = new ArrayList<UiChange>();
+
+        board.printBoard();
+        System.out.println("-------------------------------------------------------------");
 
         if (this.firstSquare != null) {
             this.secondSquare = click;
@@ -91,14 +92,15 @@ public class ChessController {
 
             if(validMove != null) {
                 validMove.executeMove(board);
-                if(board.isKingUnderAttack(currentPlayer)) {
+                if(board.isKingUnderAttack(currentPlayer == Colour.BLACK ? Colour.WHITE : Colour.BLACK)) {
+                    validMove.revertMove(board);
                     validMove = null;
+                } else {
+                    validMove.revertMove(board);
                 }
-                validMove.revertMove(board);
             }
         }
 
         return validMove;
     }
-
 }

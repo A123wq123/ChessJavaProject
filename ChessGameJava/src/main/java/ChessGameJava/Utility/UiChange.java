@@ -26,7 +26,7 @@ public class UiChange {
      */
     public UiChange(Position pos, ChessABSPieceModel piece, boolean isPossibleMove) {
         this.position = pos;
-        this.pieceName = this.getNameFromABSPice(piece);
+        this.pieceName = UiChange.getNameFromABSPiece(piece);
         this.colour = piece.getColour();
         this.isHighlightedMove = isPossibleMove;
     }
@@ -56,7 +56,7 @@ public class UiChange {
      */
     public boolean getIsHighlightedMove() { return this.isHighlightedMove; }
 
-    public PIECENAME getNameFromABSPice(ChessABSPieceModel piece) {
+    public static PIECENAME getNameFromABSPiece(ChessABSPieceModel piece) {
         if(piece instanceof King) {
             return PIECENAME.KING;
         } else {

@@ -23,11 +23,22 @@ public abstract class ChessABSPieceModel {
      * as a parameter. This method can check if a move is legal (does not cross a piece
      * etc.) but cannot check if the king is in check after the move. As an example, this
      * would return all possible legal squares a knight can move to but not if that move
-     * puts the players king in check.
+     * puts the players king in check. As a general rule, it should do all necessary checks that
+     * do not depend on the rules of the game mode. 
      * @param currentPos the square identifying
      * @return an array of the possible squares the piece can get to.
      */
-    abstract public ArrayList<ChessABSMove> getListMoves(ChessSquareModel currentPos);
+    abstract public ArrayList<ChessABSMove> getListMoves(ChessSquareModel currentSquare);
+
+    /**
+     * Returns all the squares that the piece can attack. For most pieces this is the same as the 
+     * getListMoves method but the result is formatted to only return squares and not moves. 
+     * However, it is possible for a piece to have squares they can attack but not move to 
+     * hence the need for two methods. 
+     * @param currentPos
+     * @return
+     */
+    abstract public ArrayList<ChessSquareModel> getListAttackingSquares(ChessSquareModel currentSquare);
 
     public Colour getColour() {
         return this.colour;

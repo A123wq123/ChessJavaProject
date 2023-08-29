@@ -20,8 +20,8 @@ public class ChessSquareModel {
     /**
      * Constructor of a ChessSquareModel instance. Initiates the piece attribute
      * to a NullPiece instance.
-     * @param row the row the square is positioned at, also its y coordinate.
      * @param column the column the square is positioned at, also its x coordinate.
+     * @param row the row the square is positioned at, also its y coordinate.
      */
     public ChessSquareModel(int column, int row) {
         this.position = new Position(column, row);
@@ -64,7 +64,7 @@ public class ChessSquareModel {
     }
 
     public ChessSquareModel copy() {
-        ChessSquareModel copy = new ChessSquareModel(this.position.getCoordY(), this.position.getCoordX());
+        ChessSquareModel copy = new ChessSquareModel(this.position.getCoordX(), this.position.getCoordY());
         copy.addPiece(this.getPiece());
         return copy;
     }

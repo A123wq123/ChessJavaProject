@@ -79,4 +79,8 @@ public class Position {
     public Position sumPosition(int x, int y) {
         return new Position(this.coordX + x, this.coordY + y);
     }
+
+    public boolean equals(Position secondPosition) {
+        return this.coordX == secondPosition.getCoordX() && this.coordY == secondPosition.getCoordY();
+    }
 }

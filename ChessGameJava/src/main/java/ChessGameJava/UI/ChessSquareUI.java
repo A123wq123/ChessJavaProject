@@ -26,6 +26,7 @@ public class ChessSquareUI extends JLabel implements MouseListener {
     public Position position;
     public String pieceName;
     private ChessController controller;
+    private ChessBoardUI uiBoard;
 
     /**
      * Constructor of a ChessSquareUI component. Sets every variable necessary for proper ui
@@ -33,12 +34,13 @@ public class ChessSquareUI extends JLabel implements MouseListener {
      * @param column the column of the square, which is also its x coordinate.
      * @param row the row of the square, which is also its y coordinate.
      */
-    public ChessSquareUI(int column, int row, ChessController controller) {
+    public ChessSquareUI(int column, int row, ChessController controller, ChessBoardUI uiBoard) {
         position = new Position(column, row);
         //pieceName = String.valueOf("\u2654");
         pieceName = null;
         //String noName = "\u2654";
         this.controller = controller;
+        this.uiBoard = uiBoard;
 
         if ((position.sumCoordinates())%2 == 0) {
             this.setBackground(Color.WHITE);
@@ -64,9 +66,9 @@ public class ChessSquareUI extends JLabel implements MouseListener {
      */
     @Override
     public void mouseClicked(MouseEvent e) {
+        System.out.println(String.format("x: %s, y: %s", position.getCoordX(), position.getCoordY()));
         ArrayList<UiChange> changes = this.controller.processClick(position);
-
-        ((ChessBoardUI) e.getComponent().getParent()).makeChanges(changes);
+        this.uiBoard.makeChanges(changes);
     }
 
     /**

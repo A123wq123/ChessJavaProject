@@ -15,7 +15,7 @@ public class BasicMove extends ChessABSMove{
         this.firstSquare = firstSquare;
         this.secondSquare = secondSquare;
         this.moveWasExecuted = false;
-        this.temp = null;
+        this.temp = secondSquare.copy();
     }
 
     @Override
@@ -26,7 +26,6 @@ public class BasicMove extends ChessABSMove{
         }
 
         // Make the move
-        this.temp = this.secondSquare.copy();
         board.swappSquare(this.temp);
 
         board.swappSquares(this.firstSquare.getPosition(), this.temp.getPosition());
@@ -48,9 +47,9 @@ public class BasicMove extends ChessABSMove{
 
         // Revert the move
         board.swappSquares(this.temp.getPosition(), this.firstSquare.getPosition());
+        
         board.swappSquare(this.secondSquare);
         this.moveWasExecuted = false;
-        this.temp = null;
 
         // Get the changes
         listChanges.add(new UiChange(this.firstSquare.getPosition(), this.firstSquare.getPiece(), moveWasExecuted));

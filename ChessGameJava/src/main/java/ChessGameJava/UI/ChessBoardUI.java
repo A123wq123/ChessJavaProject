@@ -96,7 +96,7 @@ public class ChessBoardUI extends JFrame{
         ChessController controller = new ChessController();
         for (int row = 0; row < numberOfRows; row++) {
             for (int column = 0; column < numberOfRows; column++) {
-                ChessSquareUI square = new ChessSquareUI(column, row, controller);
+                ChessSquareUI square = new ChessSquareUI(column, row, controller, this);
                 super.add(square);
                 listSquares.add(square);
             }

@@ -3,7 +3,7 @@ package ChessGameJava.Logic;
 import ChessGameJava.Logic.Pieces.ChessABSPieceModel;
 import ChessGameJava.Logic.Pieces.King;
 import ChessGameJava.Utility.Position;
-import java.util.Objects;
+import ChessGameJava.Utility.UiChange;
 
 /**
  * Class representing a chess board on the logic side of this project. This class is in charge of
@@ -79,15 +79,28 @@ public class ChessBoardModel {
      */
     public boolean isKingUnderAttack(Colour colourOfAttacker) {
         // To check if the kind is under attack.
-        return true;
+        Position positionOfKing = this.getPositionOfKing(colourOfAttacker == Colour.BLACK ? Colour.WHITE : Colour.BLACK).getPosition();
+        for (int row = 0; row < numberOfRows; row++) {
+            for (int column = 0; column < numberOfRows; column++) {
+                ChessSquareModel currentSquare = this.getSquareModel(new Position(column, row));
+                if(currentSquare.getPiece().getColour() == colourOfAttacker) {
+                    if(currentSquare.getPiece().getListAttackingSquares(currentSquare).stream().anyMatch(square -> square.getPosition() == positionOfKing)) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
     }
 
     /**
+     * #TODO 
      * This method is used to initialize a board with its pieces. 
      */
     private void addPieces() {
-        ChessSquareModel square = getSquareModel(new Position(7, 4));
+        ChessSquareModel square = getSquareModel(new Position(4, 7));
         square.addPiece(new King(this, Colour.WHITE));
+        this.positionOfWhiteKing = square;
     }
 
     /**
@@ -106,12 +119,7 @@ public class ChessBoardModel {
      * @return the square on which the king is located.
      */
     public ChessSquareModel getPositionOfKing(Colour colourOfKing) {
-        if (Objects.equals(colourOfKing, Colour.WHITE)) {
-            return getPositionOfWhiteKing();
-        }
-        else {
-            return getPositionOfBlackKing();
-        }
+        return colourOfKing == Colour.WHITE ? getPositionOfWhiteKing() : getPositionOfBlackKing();
     }
 
     /**
@@ -131,11 +139,22 @@ public class ChessBoardModel {
      * @param second the position of the second square
      */
     public void swappSquares(Position first, Position second) {
+
         ChessSquareModel firstSquare = this.getSquareModel(first);
         squareList[first.getCoordY()][first.getCoordX()] = this.getSquareModel(second);
         squareList[second.getCoordY()][second.getCoordX()] = firstSquare;
 
         this.getSquareModel(first).changePosition(first);
         this.getSquareModel(second).changePosition(second);
+    }
+
+    public void printBoard() {
+       for (int row = 0; row < numberOfRows; row++) {
+            String line = "";
+            for (int column = 0; column < numberOfRows; column++) {
+                line = line + String.format("%s | ", UiChange.getNameFromABSPiece(squareList[row][column].getPiece()));
+            }
+            System.out.println(line);
+       }
     }
 }
