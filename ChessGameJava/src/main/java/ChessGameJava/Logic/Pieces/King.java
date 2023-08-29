@@ -22,9 +22,8 @@ public class King extends ChessABSPieceModel {
      * @param board the instance of the ches board.
      * @param colourOfPiece the colour of the king.
      */
-    public King(ChessBoardModel board, Colour colourOfPiece) {
+    public King(Colour colourOfPiece) {
         super();
-        this.board = board;
         this.colour = colourOfPiece;
     }
 
@@ -36,8 +35,8 @@ public class King extends ChessABSPieceModel {
      * @return an array of the possible squares the king can get to.
      */
     @Override
-    public ArrayList<ChessABSMove> getListMoves(ChessSquareModel currentSquare) {
-        ArrayList<ChessSquareModel> listSquares = this.getListAttackingSquares(currentSquare);
+    public ArrayList<ChessABSMove> getListMoves(ChessSquareModel currentSquare, ChessBoardModel board) {
+        ArrayList<ChessSquareModel> listSquares = this.getListAttackingSquares(currentSquare, board);
         ArrayList<ChessABSMove> listMoves = new ArrayList<>();
         for (ChessSquareModel destSquare : listSquares) {
             if(!checkIfMoveAttacksSameColour(currentSquare, destSquare)) {
@@ -51,7 +50,7 @@ public class King extends ChessABSPieceModel {
     }
 
     @Override
-    public ArrayList<ChessSquareModel> getListAttackingSquares(ChessSquareModel currentSquare) {
+    public ArrayList<ChessSquareModel> getListAttackingSquares(ChessSquareModel currentSquare, ChessBoardModel board) {
         ArrayList<ChessSquareModel> listSquares = new ArrayList<>();
         Position currentPosition = currentSquare.getPosition();
 
@@ -60,7 +59,7 @@ public class King extends ChessABSPieceModel {
                 try {
                     Position position = currentPosition.sumPosition(rowMove, columnMove);
                     if(!position.equals(currentPosition)) {
-                        listSquares.add(this.board.getSquareModel(position));
+                        listSquares.add(board.getSquareModel(position));
                     }
                 } catch (Exception e) {
                     continue;

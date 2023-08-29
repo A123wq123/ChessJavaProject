@@ -15,7 +15,6 @@ import java.util.ArrayList;
  * @Last_Updated 2022-12-23
  */
 public abstract class ChessABSPieceModel {
-    protected ChessBoardModel board;
     protected Colour colour;
 
     /**
@@ -25,20 +24,22 @@ public abstract class ChessABSPieceModel {
      * would return all possible legal squares a knight can move to but not if that move
      * puts the players king in check. As a general rule, it should do all necessary checks that
      * do not depend on the rules of the game mode. 
-     * @param currentPos the square identifying
-     * @return an array of the possible squares the piece can get to.
+     * @param currentPos The square the piece is currently on.
+     * @param board The ChessBoardModel instance the game is played on. 
+     * @return an array of the possible moves the piece can do.
      */
-    abstract public ArrayList<ChessABSMove> getListMoves(ChessSquareModel currentSquare);
+    abstract public ArrayList<ChessABSMove> getListMoves(ChessSquareModel currentSquare, ChessBoardModel board);
 
     /**
      * Returns all the squares that the piece can attack. For most pieces this is the same as the 
      * getListMoves method but the result is formatted to only return squares and not moves. 
      * However, it is possible for a piece to have squares they can attack but not move to 
-     * hence the need for two methods. 
-     * @param currentPos
-     * @return
+     * hence the need for two methods (Pawns can attack in diagonal but not always move there). 
+     * @param currentPos The square the piece is currently on. 
+     * @param board The ChessBoardModel instance the game is played on. 
+     * @return An array of the possible squares a piece is attacking. 
      */
-    abstract public ArrayList<ChessSquareModel> getListAttackingSquares(ChessSquareModel currentSquare);
+    abstract public ArrayList<ChessSquareModel> getListAttackingSquares(ChessSquareModel currentSquare, ChessBoardModel board);
 
     public Colour getColour() {
         return this.colour;

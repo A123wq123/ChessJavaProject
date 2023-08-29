@@ -3,6 +3,7 @@ package ChessGameJava.Utility;
 import ChessGameJava.Logic.Colour;
 import ChessGameJava.Logic.Pieces.ChessABSPieceModel;
 import ChessGameJava.Logic.Pieces.King;
+import ChessGameJava.Logic.Pieces.Rook;
 
 /**
  * This class represents a given change that needs to be made to the UI of the application. In short, 
@@ -59,6 +60,8 @@ public class UiChange {
     public static PIECENAME getNameFromABSPiece(ChessABSPieceModel piece) {
         if(piece instanceof King) {
             return PIECENAME.KING;
+        } else if (piece instanceof Rook) {
+            return PIECENAME.ROOK;
         } else {
             return PIECENAME.NULL;
         }

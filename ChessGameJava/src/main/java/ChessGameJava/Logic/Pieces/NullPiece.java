@@ -1,5 +1,6 @@
 package ChessGameJava.Logic.Pieces;
 
+import ChessGameJava.Logic.ChessBoardModel;
 import ChessGameJava.Logic.ChessSquareModel;
 import ChessGameJava.Logic.Colour;
 import ChessGameJava.Logic.Moves.ChessABSMove;
@@ -28,12 +29,12 @@ public class NullPiece extends ChessABSPieceModel {
      * @return the list of moves the piece is capable of doing.
      */
     @Override
-    public ArrayList<ChessABSMove> getListMoves(ChessSquareModel currentSquare) {
+    public ArrayList<ChessABSMove> getListMoves(ChessSquareModel currentSquare, ChessBoardModel board) {
         return new ArrayList<>();
     }
 
     @Override
-    public ArrayList<ChessSquareModel> getListAttackingSquares(ChessSquareModel currentSquare) {
+    public ArrayList<ChessSquareModel> getListAttackingSquares(ChessSquareModel currentSquare, ChessBoardModel board) {
         return new ArrayList<>();
     }
 }

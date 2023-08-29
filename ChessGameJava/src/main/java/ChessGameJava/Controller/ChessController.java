@@ -50,7 +50,7 @@ public class ChessController {
         else if (board.getSquareModel(click).getPiece().getColour() == this.currentPlayer){
             this.firstSquare = click;
             ChessSquareModel selectedSquare = board.getSquareModel(click);
-            for (ChessABSMove move : selectedSquare.getPiece().getListMoves(selectedSquare)) {
+            for (ChessABSMove move : selectedSquare.getPiece().getListMoves(selectedSquare, this.board)) {
                 // Might need to further filter the moves depending on like a game mode. 
                 // The idea being that a piece returns the moves it can do but has no knowledge of the game mode. 
                 // A great example is checkmate vrs est all. in eat all a move is valid even if it puts the king 
@@ -78,7 +78,7 @@ public class ChessController {
         ChessABSMove validMove = null;
 
         if (secondClick.getPiece().getColour() != this.currentPlayer) {
-            ArrayList<ChessABSMove> possibleMoves = firstClick.getPiece().getListMoves(firstClick);
+            ArrayList<ChessABSMove> possibleMoves = firstClick.getPiece().getListMoves(firstClick, this.board);
 
             for(ChessABSMove move: possibleMoves) {
                 if((move.getFirstSquare() == firstClick) && (move.getSecondSquare() == secondClick)) {

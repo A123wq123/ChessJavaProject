@@ -9,7 +9,15 @@ import ChessGameJava.Logic.ChessSquareModel;
 import ChessGameJava.Logic.Colour;
 import ChessGameJava.Logic.Pieces.NullPiece;
 
-enum DIRECTION {
+/**
+ * A class that acts as a helper to calculate various basic lines. 
+ * @Author Charles Degrandpré
+ * @Last_Updated 2022-12-23
+ */
+public abstract class MoveCalculatorHelper {
+    public final static List<DIRECTION> lines = Arrays.asList(DIRECTION.NORTH, DIRECTION.EAST, DIRECTION.SOUTH, DIRECTION.WEST);
+    public final static List<DIRECTION> diagonals = Arrays.asList(DIRECTION.NORTH_EAST, DIRECTION.SOUTH_EAST, DIRECTION.SOUTH_WEST, DIRECTION.NORTH_WEST);
+    public static enum DIRECTION {
         NORTH,
         NORTH_EAST,
         EAST,
@@ -19,15 +27,6 @@ enum DIRECTION {
         WEST,
         NORTH_WEST
     }
-
-/**
- * A class that acts as a helper to calculate various basic lines. 
- * @Author Charles Degrandpré
- * @Last_Updated 2022-12-23
- */
-public abstract class MoveCalculatorHelper {
-    private final List<DIRECTION> lines = Arrays.asList(DIRECTION.NORTH, DIRECTION.EAST, DIRECTION.SOUTH, DIRECTION.WEST);
-    private final List<DIRECTION> diagonals = Arrays.asList(DIRECTION.NORTH_EAST, DIRECTION.SOUTH_EAST, DIRECTION.SOUTH_WEST, DIRECTION.NORTH_WEST);
 
     /**
      * Helper function to calculate all the squares on a line from the board that can be considered as a valid 
@@ -39,7 +38,7 @@ public abstract class MoveCalculatorHelper {
      * @param board The current board.
      * @return And ArrayList<ChessSquareModel> containing all the valid squares. 
      */
-    public ArrayList<ChessSquareModel> calculateLine(DIRECTION direction, Position currentPos, Colour pieceColour, ChessBoardModel board) {
+    public static ArrayList<ChessSquareModel> calculateLine(DIRECTION direction, Position currentPos, Colour pieceColour, ChessBoardModel board) {
         ArrayList<ChessSquareModel> listSquares = new ArrayList<>();
 
         if(!lines.contains(direction)) {
@@ -132,7 +131,7 @@ public abstract class MoveCalculatorHelper {
      * @param board The current board.
      * @return And ArrayList<ChessSquareModel> containing all the valid squares. 
      */
-    public ArrayList<ChessSquareModel> calculateDiagonal(DIRECTION direction, Position currentPos, Colour pieceColour, ChessBoardModel board) {
+    public static ArrayList<ChessSquareModel> calculateDiagonal(DIRECTION direction, Position currentPos, Colour pieceColour, ChessBoardModel board) {
         ArrayList<ChessSquareModel> listSquares = new ArrayList<>();
 
         if(!diagonals.contains(direction)) {
