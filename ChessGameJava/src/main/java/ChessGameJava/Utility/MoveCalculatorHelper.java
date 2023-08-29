@@ -15,7 +15,7 @@ enum DIRECTION {
         EAST,
         SOUTH_EAST,
         SOUTH,
-        SOUTh_WEST,
+        SOUTH_WEST,
         WEST,
         NORTH_WEST
     }
@@ -27,7 +27,7 @@ enum DIRECTION {
  */
 public abstract class MoveCalculatorHelper {
     private final List<DIRECTION> lines = Arrays.asList(DIRECTION.NORTH, DIRECTION.EAST, DIRECTION.SOUTH, DIRECTION.WEST);
-    private final List<DIRECTION> diagonals = Arrays.asList(DIRECTION.NORTH_EAST, DIRECTION.SOUTH_EAST, DIRECTION.SOUTh_WEST, DIRECTION.NORTH_WEST);
+    private final List<DIRECTION> diagonals = Arrays.asList(DIRECTION.NORTH_EAST, DIRECTION.SOUTH_EAST, DIRECTION.SOUTH_WEST, DIRECTION.NORTH_WEST);
 
     /**
      * Helper function to calculate all the squares on a line from the board that can be considered as a valid 
@@ -174,7 +174,7 @@ public abstract class MoveCalculatorHelper {
                     }
                 }
                 break;
-            case SOUTh_WEST:
+            case SOUTH_WEST:
                 for(int index = 1; index < ChessBoardModel.numberOfRows; index++) {
                     try {
                         Position dest = new Position(currentPos.getCoordX() - index, currentPos.getCoordY() - index);
