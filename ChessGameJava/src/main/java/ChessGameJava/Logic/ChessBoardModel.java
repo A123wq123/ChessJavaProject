@@ -98,10 +98,62 @@ public class ChessBoardModel {
      * This method is used to initialize a board with its pieces. 
      */
     private void addPieces() {
+        this.addWhitePieces();
+        this.addBlackPieces();
+    }
+
+    private void addWhitePieces() {
+        //  // Add Pawns
+        // for (int i = 0; i < numberOfRows; i++) {
+        //     getSquareUI(6, i).setText(this.getPieceName(PIECENAME.PAWN, Colour.WHITE));
+        // }
+        // // Add towers
+        // for (int i  = 0; i < 2; i++) {
+        //     getSquareUI(7, i*7).setText(this.getPieceName(PIECENAME.ROOK, Colour.WHITE));
+        // }
+        // // Add knights
+        // for (int i  = 0; i < 2; i++) {
+        //     getSquareUI(7, 1+i*5).setText(this.getPieceName(PIECENAME.KNIGHT, Colour.WHITE));
+        // }
+        // // Add bishops
+        // for (int i  = 0; i < 2; i++) {
+        //     getSquareUI(7, 2+i*3).setText(this.getPieceName(PIECENAME.BISHOP, Colour.WHITE));
+        // }
+        // // Add queen
+        // getSquareUI(7,3).setText(this.getPieceName(PIECENAME.QUEEN, Colour.WHITE));
+
+        // Add king
         ChessSquareModel square = getSquareModel(new Position(4, 7));
         square.addPiece(new King(this, Colour.WHITE));
         this.positionOfWhiteKing = square;
     }
+
+    private void addBlackPieces() {
+        // // Add Pawns
+        // for (int i = 0; i < numberOfRows; i++) {
+        //     getSquareUI(1, i).setText(this.getPieceName(PIECENAME.PAWN, Colour.BLACK));
+        // }
+        // // Add towers
+        // for (int i  = 0; i < 2; i++) {
+        //     getSquareUI(0, i*7).setText(this.getPieceName(PIECENAME.ROOK, Colour.BLACK));
+        // }
+        // // Add knights
+        // for (int i  = 0; i < 2; i++) {
+        //     getSquareUI(0, 1+i*5).setText(this.getPieceName(PIECENAME.KNIGHT, Colour.BLACK));
+        // }
+        // // Add bishops
+        // for (int i  = 0; i < 2; i++) {
+        //     getSquareUI(0, 2+i*3).setText(this.getPieceName(PIECENAME.BISHOP, Colour.BLACK));
+        // }
+        // // Add queen
+        // getSquareUI(0,3).setText(this.getPieceName(PIECENAME.QUEEN, Colour.BLACK));
+
+        // Add king
+        ChessSquareModel square = getSquareModel(new Position(4, 0));
+        square.addPiece(new King(this, Colour.BLACK));
+        this.positionOfBlackKing = square;
+    }
+
 
     /**
      * @return returns the square of the white king.

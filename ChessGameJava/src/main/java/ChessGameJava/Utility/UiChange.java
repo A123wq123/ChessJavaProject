@@ -67,7 +67,7 @@ public class UiChange {
     /**
      * Enum of all the possible piece we can be. 
      */
-    public enum PIECENAME {
+    public static enum PIECENAME {
         KING, 
         QUEEN,
         ROOK,
