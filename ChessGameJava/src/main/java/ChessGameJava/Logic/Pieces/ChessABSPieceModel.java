@@ -16,6 +16,7 @@ import java.util.ArrayList;
  */
 public abstract class ChessABSPieceModel {
     protected Colour colour;
+    public boolean hasMoved = false;
 
     /**
      * Returns all the possibles moves the piece can make by receiving its square

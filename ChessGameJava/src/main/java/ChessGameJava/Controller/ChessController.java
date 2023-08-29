@@ -42,6 +42,7 @@ public class ChessController {
             System.out.println(validMove);
             if (validMove != null) {
                 listChanges = validMove.executeMove(board);
+                this.board.getSquareModel(this.firstSquare).getPiece().hasMoved = true;
                 this.currentPlayer = this.currentPlayer == Colour.BLACK ? Colour.WHITE : Colour.BLACK;
             }
 
