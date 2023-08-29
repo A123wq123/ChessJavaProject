@@ -3,6 +3,7 @@ package ChessGameJava.Logic.Pieces;
 import ChessGameJava.Logic.ChessBoardModel;
 import ChessGameJava.Logic.ChessSquareModel;
 import ChessGameJava.Logic.Colour;
+import ChessGameJava.Logic.Moves.BasicMove;
 import ChessGameJava.Logic.Moves.ChessABSMove;
 
 import java.util.ArrayList;
@@ -24,12 +25,23 @@ public abstract class ChessABSPieceModel {
      * etc.) but cannot check if the king is in check after the move. As an example, this
      * would return all possible legal squares a knight can move to but not if that move
      * puts the players king in check. As a general rule, it should do all necessary checks that
-     * do not depend on the rules of the game mode. 
+     * do not depend on the rules of the game mode. You may want to override this behavior in 
+     * child classes. 
      * @param currentPos The square the piece is currently on.
      * @param board The ChessBoardModel instance the game is played on. 
      * @return an array of the possible moves the piece can do.
      */
-    abstract public ArrayList<ChessABSMove> getListMoves(ChessSquareModel currentSquare, ChessBoardModel board);
+    public ArrayList<ChessABSMove> getListMoves(ChessSquareModel currentSquare, ChessBoardModel board) {
+        ArrayList<ChessSquareModel> listSquares = getListAttackingSquares(currentSquare, board);
+        ArrayList<ChessABSMove> listMoves = new ArrayList<>();
+
+        for (ChessSquareModel destSquare : listSquares) {
+            if(!checkIfMoveAttacksSameColour(currentSquare, destSquare)) {
+                listMoves.add(new BasicMove(currentSquare, destSquare));
+            }
+        }
+        return listMoves;
+    }
 
     /**
      * Returns all the squares that the piece can attack. For most pieces this is the same as the 

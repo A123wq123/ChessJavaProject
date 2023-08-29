@@ -13,13 +13,13 @@ import java.util.ArrayList;
  * The class representing a king within the project. This class is capable of returning all
  * possible moves that the king can do.
  * @Author Charles Degrandpré
- * @Last_Updated 2022-12-23
+ * @Last_Updated 2023-08-29
  */
 public class King extends ChessABSPieceModel {
 
     /**
      * Constructor of the King class. Assigns the board as well as the colour of the piece.
-     * @param board the instance of the ches board.
+     * @param board the instance of the chess board.
      * @param colourOfPiece the colour of the king.
      */
     public King(Colour colourOfPiece) {
