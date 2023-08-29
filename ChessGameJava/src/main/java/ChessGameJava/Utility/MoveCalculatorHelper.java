@@ -193,7 +193,7 @@ public abstract class MoveCalculatorHelper {
             case NORTH_WEST:
                 for(int index = 1; index < ChessBoardModel.numberOfRows; index++) {
                     try {
-                        Position dest = new Position(currentPos.getCoordX() - index, currentPos.getCoordY() - index);
+                        Position dest = new Position(currentPos.getCoordX() - index, currentPos.getCoordY() + index);
                         ChessSquareModel destSquare = board.getSquareModel(dest);
                         if(!(destSquare.getPiece() instanceof NullPiece)) {
                             if(destSquare.getPiece().getColour() != pieceColour) {

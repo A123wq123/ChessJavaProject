@@ -1,6 +1,7 @@
 package ChessGameJava.Utility;
 
 import ChessGameJava.Logic.Colour;
+import ChessGameJava.Logic.Pieces.Bishop;
 import ChessGameJava.Logic.Pieces.ChessABSPieceModel;
 import ChessGameJava.Logic.Pieces.King;
 import ChessGameJava.Logic.Pieces.Rook;
@@ -62,6 +63,8 @@ public class UiChange {
             return PIECENAME.KING;
         } else if (piece instanceof Rook) {
             return PIECENAME.ROOK;
+        } else if (piece instanceof Bishop) {
+            return PIECENAME.BISHOP;
         } else {
             return PIECENAME.NULL;
         }

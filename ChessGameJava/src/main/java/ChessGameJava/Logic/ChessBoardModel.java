@@ -1,5 +1,6 @@
 package ChessGameJava.Logic;
 
+import ChessGameJava.Logic.Pieces.Bishop;
 import ChessGameJava.Logic.Pieces.ChessABSPieceModel;
 import ChessGameJava.Logic.Pieces.King;
 import ChessGameJava.Logic.Pieces.Rook;
@@ -114,14 +115,18 @@ public class ChessBoardModel {
             ChessSquareModel square = getSquareModel(new Position(i*7, 7));
             square.addPiece(new Rook(Colour.WHITE));
         }
+
         // // Add knights
         // for (int i  = 0; i < 2; i++) {
         //     getSquareUI(7, 1+i*5).setText(this.getPieceName(PIECENAME.KNIGHT, Colour.WHITE));
         // }
-        // // Add bishops
-        // for (int i  = 0; i < 2; i++) {
-        //     getSquareUI(7, 2+i*3).setText(this.getPieceName(PIECENAME.BISHOP, Colour.WHITE));
-        // }
+
+        // Add bishops
+        for (int i  = 0; i < 2; i++) {
+            ChessSquareModel square = getSquareModel(new Position(2+i*3, 7));
+            square.addPiece(new Bishop(Colour.WHITE));
+        }
+
         // // Add queen
         // getSquareUI(7,3).setText(this.getPieceName(PIECENAME.QUEEN, Colour.WHITE));
 
@@ -147,10 +152,13 @@ public class ChessBoardModel {
         // for (int i  = 0; i < 2; i++) {
         //     getSquareUI(0, 1+i*5).setText(this.getPieceName(PIECENAME.KNIGHT, Colour.BLACK));
         // }
-        // // Add bishops
-        // for (int i  = 0; i < 2; i++) {
-        //     getSquareUI(0, 2+i*3).setText(this.getPieceName(PIECENAME.BISHOP, Colour.BLACK));
-        // }
+
+        // Add bishops
+        for (int i  = 0; i < 2; i++) {
+            ChessSquareModel square = getSquareModel(new Position(2+i*3, 0));
+            square.addPiece(new Bishop(Colour.BLACK));
+        }
+
         // // Add queen
         // getSquareUI(0,3).setText(this.getPieceName(PIECENAME.QUEEN, Colour.BLACK));
 
