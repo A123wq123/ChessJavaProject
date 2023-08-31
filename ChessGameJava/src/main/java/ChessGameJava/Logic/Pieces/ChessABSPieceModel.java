@@ -7,6 +7,7 @@ import ChessGameJava.Logic.Moves.BasicMove;
 import ChessGameJava.Logic.Moves.ChessABSMove;
 
 import java.util.ArrayList;
+import java.util.WeakHashMap;
 
 /**
  * Abstract class from which all pieces inherit from. This class keeps track of
@@ -27,7 +28,7 @@ public abstract class ChessABSPieceModel {
      * puts the players king in check. As a general rule, it should do all necessary checks that
      * do not depend on the rules of the game mode. You may want to override this behavior in 
      * child classes. 
-     * @param currentPos The square the piece is currently on.
+     * @param currentSquare The square the piece is currently on.
      * @param board The ChessBoardModel instance the game is played on. 
      * @return an array of the possible moves the piece can do.
      */

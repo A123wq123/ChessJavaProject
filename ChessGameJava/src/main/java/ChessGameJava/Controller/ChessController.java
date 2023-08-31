@@ -7,6 +7,7 @@ import ChessGameJava.Logic.ChessBoardModel;
 import ChessGameJava.Logic.ChessSquareModel;
 import ChessGameJava.Logic.Colour;
 import ChessGameJava.Logic.Moves.ChessABSMove;
+import ChessGameJava.Logic.Pieces.Pawn;
 import ChessGameJava.Utility.Position;
 import ChessGameJava.Utility.UiChange;
 
@@ -44,7 +45,7 @@ public class ChessController {
             ChessABSMove validMove = this.isMoveValid();
             System.out.println(validMove);
             if (validMove != null) {
-                listChanges = validMove.executeMove(board);
+                listChanges = validMove.processExecuteMove(board);
                 this.board.getSquareModel(this.firstSquare).getPiece().hasMoved = true;
                 this.currentPlayer = this.currentPlayer == Colour.BLACK ? Colour.WHITE : Colour.BLACK;
             }
@@ -93,13 +94,13 @@ public class ChessController {
             }
 
             if(validMove != null) {
-                validMove.executeMove(board);
+                validMove.processExecuteMove(board);
                 if(board.isKingUnderAttack(currentPlayer == Colour.BLACK ? Colour.WHITE : Colour.BLACK)) {
                     System.out.println("King is under attack?!");
-                    validMove.revertMove(board);
+                    validMove.processRevertMove(board);
                     validMove = null;
                 } else {
-                    validMove.revertMove(board);
+                    validMove.processRevertMove(board);
                 }
             }
         }

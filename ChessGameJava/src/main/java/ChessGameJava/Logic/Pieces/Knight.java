@@ -39,7 +39,6 @@ public class Knight extends ChessABSPieceModel {
                 } catch (Exception e) {
                 }
                 try {
-                    System.out.println("Got in second try");
                     Position position2 = currentPosition.sumPosition(y,x);
                     listSquares.add(board.getSquareModel(position2));
                 } catch (Exception e) {

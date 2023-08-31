@@ -3,22 +3,9 @@ package ChessGameJava.Logic.Moves;
 import java.util.ArrayList;
 
 import ChessGameJava.Logic.ChessBoardModel;
-import ChessGameJava.Logic.ChessSquareModel;
 import ChessGameJava.Utility.UiChange;
 
-/**
- * #TODO come back and do this. 
- */
-public class Castle extends ChessABSMove {
-
-    private ChessSquareModel temp;
-
-    public Castle(ChessSquareModel firstSquare, ChessSquareModel secondSquare) {
-        super();
-        this.firstSquare = firstSquare;
-        this.secondSquare = secondSquare;
-        this.temp = new ChessSquareModel(secondSquare.getPosition().getCoordX(), secondSquare.getPosition().getCoordY());
-    }
+public class EnPassant extends ChessABSMove {
 
     @Override
     public ArrayList<UiChange> executeMove(ChessBoardModel board) {
