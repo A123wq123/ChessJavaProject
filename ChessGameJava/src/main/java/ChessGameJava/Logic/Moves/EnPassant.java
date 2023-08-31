@@ -34,7 +34,6 @@ public class EnPassant extends BasicMove {
 
         if(Math.abs(secondSquare.getPosition().getCoordY() - firstSquare.getPosition().getCoordY()) == 2) {
             piece.turnOfDoubleMove = ChessABSMove.getMoveCountForBoard(board);
-            piece.canMoveTwice = false;
         }
 
         return listChanges;
@@ -56,7 +55,6 @@ public class EnPassant extends BasicMove {
 
         if(Math.abs(secondSquare.getPosition().getCoordY() - firstSquare.getPosition().getCoordY()) == 2) {
             piece.turnOfDoubleMove = ChessABSMove.getMoveCountForBoard(board);
-            piece.canMoveTwice = true;
         }
 
         return listChanges;

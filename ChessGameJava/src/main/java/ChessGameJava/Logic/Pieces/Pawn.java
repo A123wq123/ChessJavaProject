@@ -15,7 +15,6 @@ public class Pawn extends ChessABSPieceModel{
 
     public static Integer turnOfLastPlayedPawn = null;
     public Integer turnOfDoubleMove = null;
-    public boolean canMoveTwice = true;
 
     /**
      * Constructor of the Pawn class. Assigns the board as well as the colour of the piece.
@@ -131,7 +130,7 @@ public class Pawn extends ChessABSPieceModel{
             Position position1 = currentSquare.getPosition().sumPosition(0, -1);
             if(board.getSquareModel(position1).getPiece().getColour() == Colour.NULL) {
                 listMoves.add(new BasicMovePawn(currentSquare, board.getSquareModel(position1)));
-                if(this.canMoveTwice) {
+                if(!this.hasMoved) {
                     Position position2 = currentSquare.getPosition().sumPosition(0, -2);
                     if(board.getSquareModel(position2).getPiece().getColour() == Colour.NULL) {
                         listMoves.add(new BasicMovePawn(currentSquare, board.getSquareModel(position2)));
@@ -162,7 +161,7 @@ public class Pawn extends ChessABSPieceModel{
             Position position1 = currentSquare.getPosition().sumPosition(0, 1);
             if(board.getSquareModel(position1).getPiece().getColour() == Colour.NULL) {
                 listMoves.add(new BasicMovePawn(currentSquare, board.getSquareModel(position1)));
-                if(this.canMoveTwice) {
+                if(!this.hasMoved) {
                     Position position2 = currentSquare.getPosition().sumPosition(0, 2);
                     if(board.getSquareModel(position2).getPiece().getColour() == Colour.NULL) {
                         listMoves.add(new BasicMovePawn(currentSquare, board.getSquareModel(position2))); 
@@ -196,7 +195,7 @@ public class Pawn extends ChessABSPieceModel{
                 Position position = currentSquare.getPosition().sumPosition(x, 0);
                 if(board.getSquareModel(position).getPiece() instanceof Pawn) {
                     Pawn pawn = (Pawn) board.getSquareModel(position).getPiece();
-                    if(pawn.turnOfDoubleMove == ChessABSMove.getMoveCountForBoard(board)) {
+                    if(pawn.turnOfDoubleMove == ChessABSMove.getMoveCountForBoard(board) -1) {
                         if(board.getSquareModel(position.sumPosition(0, -1)).getPiece().getColour() == Colour.NULL) {
                             listMoves.add(new EnPassant(currentSquare, board.getSquareModel(position.sumPosition(0, -1)), board.getSquareModel(position))); // TODO change for en passant move
                         }
@@ -222,7 +221,7 @@ public class Pawn extends ChessABSPieceModel{
                 Position position = currentSquare.getPosition().sumPosition(x, 0);
                 if(board.getSquareModel(position).getPiece() instanceof Pawn) {
                     Pawn pawn = (Pawn) board.getSquareModel(position).getPiece();
-                    if(pawn.turnOfDoubleMove == ChessABSMove.getMoveCountForBoard(board)) {
+                    if(pawn.turnOfDoubleMove == ChessABSMove.getMoveCountForBoard(board) -1 ) {
                         if(board.getSquareModel(position.sumPosition(0, 1)).getPiece().getColour() == Colour.NULL) {
                             listMoves.add(new EnPassant(currentSquare, board.getSquareModel(position.sumPosition(0, 1)), board.getSquareModel(position))); // TODO change for en passant move
                         }

@@ -19,6 +19,7 @@ public abstract class ChessABSMove {
     protected Integer mouveCount = null;
     protected ChessSquareModel firstSquare;
     protected ChessSquareModel secondSquare;
+    protected boolean canModifyPieceHasMoved;
 
     /**
      * This method in in charge of making the necessary calls to process a given request to execute the move object. 
@@ -36,6 +37,7 @@ public abstract class ChessABSMove {
         if (!ChessABSMove.boardIdMap.containsKey(board)) {
             ChessABSMove.boardIdMap.put(board, 0);
         }
+
         if(this.mouveCount != null) {
             if(this.mouveCount != ChessABSMove.boardIdMap.get(board)) {
                 throw new RuntimeException("Cannot execute move, there is a move that was either not executed or not reverted before");
@@ -43,9 +45,15 @@ public abstract class ChessABSMove {
         } else {
             this.mouveCount = ChessABSMove.boardIdMap.get(board);
         }
+
+        this.canModifyPieceHasMoved = false;
+        if (!this.firstSquare.getPiece().hasMoved) {
+            canModifyPieceHasMoved = true;
+        }
         
         ArrayList<UiChange> listChanges = this.executeMove(board);
         ChessABSMove.boardIdMap.put(board, ChessABSMove.boardIdMap.get(board) + 1);
+        this.firstSquare.getPiece().hasMoved = true;
         return listChanges;
     };
 
@@ -79,6 +87,9 @@ public abstract class ChessABSMove {
 
         ArrayList<UiChange> listChanges = this.revertMove(board);
         ChessABSMove.boardIdMap.put(board, ChessABSMove.boardIdMap.get(board) - 1);
+        if(this.canModifyPieceHasMoved) {
+            this.firstSquare.getPiece().hasMoved = false;
+        }
         return listChanges;
     };
 

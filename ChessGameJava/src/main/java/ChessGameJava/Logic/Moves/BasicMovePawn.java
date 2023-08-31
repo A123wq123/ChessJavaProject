@@ -21,9 +21,7 @@ public class BasicMovePawn extends BasicMove {
         Pawn piece = (Pawn) this.firstSquare.getPiece();
 
         if(Math.abs(temp.getPosition().getCoordY() - firstSquare.getPosition().getCoordY()) == 2) {
-            System.out.println("Normally, we played double");
             piece.turnOfDoubleMove = ChessABSMove.getMoveCountForBoard(board);
-            piece.canMoveTwice = false;
         }
 
         return listChanges;
@@ -38,7 +36,6 @@ public class BasicMovePawn extends BasicMove {
 
         if(Math.abs(secondSquare.getPosition().getCoordY() - firstSquare.getPosition().getCoordY()) == 2) {
             piece.turnOfDoubleMove = ChessABSMove.getMoveCountForBoard(board);
-            piece.canMoveTwice = true;
         }
 
         return listChanges;
