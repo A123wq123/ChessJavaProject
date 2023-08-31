@@ -8,17 +8,16 @@ import ChessGameJava.Utility.UiChange;
 
 public class BasicMove extends ChessABSMove{
 
-    private ChessSquareModel temp;
+    protected ChessSquareModel temp;
 
     public BasicMove(ChessSquareModel firstSquare, ChessSquareModel secondSquare) {
-        super();
         this.firstSquare = firstSquare;
         this.secondSquare = secondSquare;
         this.temp = new ChessSquareModel(secondSquare.getPosition().getCoordX(), secondSquare.getPosition().getCoordY());
     }
 
     @Override
-    public ArrayList<UiChange> executeMove(ChessBoardModel board) {
+    protected ArrayList<UiChange> executeMove(ChessBoardModel board) {
         ArrayList<UiChange> listChanges = new ArrayList<>();
 
         // Make the move
@@ -34,7 +33,7 @@ public class BasicMove extends ChessABSMove{
     }
 
     @Override
-    public ArrayList<UiChange> revertMove(ChessBoardModel board) {
+    protected ArrayList<UiChange> revertMove(ChessBoardModel board) {
         ArrayList<UiChange> listChanges = new ArrayList<>();
 
         // Revert the move

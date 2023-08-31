@@ -14,13 +14,14 @@ public class BasicMovePawn extends BasicMove {
     }
     
     @Override
-    public ArrayList<UiChange> executeMove(ChessBoardModel board) {
+    protected ArrayList<UiChange> executeMove(ChessBoardModel board) {
         ArrayList<UiChange> listChanges = super.executeMove(board);
         Pawn.turnOfLastPlayedPawn = ChessABSMove.boardIdMap.get(board);
 
         Pawn piece = (Pawn) this.firstSquare.getPiece();
 
-        if(Math.abs(secondSquare.getPosition().getCoordY() - firstSquare.getPosition().getCoordY()) == 2) {
+        if(Math.abs(temp.getPosition().getCoordY() - firstSquare.getPosition().getCoordY()) == 2) {
+            System.out.println("Normally, we played double");
             piece.turnOfDoubleMove = ChessABSMove.getMoveCountForBoard(board);
             piece.canMoveTwice = false;
         }
@@ -29,7 +30,7 @@ public class BasicMovePawn extends BasicMove {
     }
 
     @Override
-    public ArrayList<UiChange> revertMove(ChessBoardModel board) {
+    protected ArrayList<UiChange> revertMove(ChessBoardModel board) {
         ArrayList<UiChange> listChanges = super.revertMove(board);
         Pawn.turnOfLastPlayedPawn = ChessABSMove.boardIdMap.get(board);
 

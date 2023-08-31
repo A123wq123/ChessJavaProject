@@ -46,11 +46,6 @@ public class Knight extends ChessABSPieceModel {
             }    
         }
 
-        for (ChessSquareModel chessSquareModel : listSquares) {
-            System.out.println("Valid square");
-            System.out.println(String.format("x: %s, y: %s", chessSquareModel.getPosition().getCoordX(), chessSquareModel.getPosition().getCoordY()));
-        }
-
         return listSquares;
     }
     

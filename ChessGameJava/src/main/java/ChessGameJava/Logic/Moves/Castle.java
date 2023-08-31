@@ -11,13 +11,13 @@ import ChessGameJava.Utility.UiChange;
  */
 public class Castle extends ChessABSMove {
 
-    private ChessSquareModel temp;
+    private ChessSquareModel opponentPawn;
 
-    public Castle(ChessSquareModel firstSquare, ChessSquareModel secondSquare) {
+    public Castle(ChessSquareModel firstSquare, ChessSquareModel secondSquare, ChessSquareModel opponentPawn) {
         super();
         this.firstSquare = firstSquare;
         this.secondSquare = secondSquare;
-        this.temp = new ChessSquareModel(secondSquare.getPosition().getCoordX(), secondSquare.getPosition().getCoordY());
+        this.opponentPawn = opponentPawn;
     }
 
     @Override
