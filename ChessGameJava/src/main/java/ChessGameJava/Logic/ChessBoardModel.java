@@ -4,6 +4,7 @@ import ChessGameJava.Logic.Pieces.Bishop;
 import ChessGameJava.Logic.Pieces.ChessABSPieceModel;
 import ChessGameJava.Logic.Pieces.King;
 import ChessGameJava.Logic.Pieces.Knight;
+import ChessGameJava.Logic.Pieces.Pawn;
 import ChessGameJava.Logic.Pieces.Queen;
 import ChessGameJava.Logic.Pieces.Rook;
 import ChessGameJava.Utility.Position;
@@ -107,10 +108,11 @@ public class ChessBoardModel {
     }
 
     private void addWhitePieces() {
-        //  // Add Pawns
-        // for (int i = 0; i < numberOfRows; i++) {
-        //     getSquareUI(6, i).setText(this.getPieceName(PIECENAME.PAWN, Colour.WHITE));
-        // }
+         // Add Pawns
+        for (int i = 0; i < numberOfRows; i++) {
+            ChessSquareModel square = getSquareModel(new Position(i, 6));
+            square.addPiece(new Pawn(Colour.WHITE));
+        }
 
         // Add towers
         for (int i  = 0; i < 2; i++) {
@@ -146,10 +148,11 @@ public class ChessBoardModel {
     }
 
     private void addBlackPieces() {
-        // // Add Pawns
-        // for (int i = 0; i < numberOfRows; i++) {
-        //     getSquareUI(1, i).setText(this.getPieceName(PIECENAME.PAWN, Colour.BLACK));
-        // }
+        // Add Pawns
+        for (int i = 0; i < numberOfRows; i++) {
+            ChessSquareModel square = getSquareModel(new Position(i, 1));
+            square.addPiece(new Pawn(Colour.BLACK));
+        }
 
         // Add towers
         for (int i  = 0; i < 2; i++) {

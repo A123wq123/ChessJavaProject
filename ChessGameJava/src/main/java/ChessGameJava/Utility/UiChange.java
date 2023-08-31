@@ -5,6 +5,7 @@ import ChessGameJava.Logic.Pieces.Bishop;
 import ChessGameJava.Logic.Pieces.ChessABSPieceModel;
 import ChessGameJava.Logic.Pieces.King;
 import ChessGameJava.Logic.Pieces.Knight;
+import ChessGameJava.Logic.Pieces.Pawn;
 import ChessGameJava.Logic.Pieces.Queen;
 import ChessGameJava.Logic.Pieces.Rook;
 
@@ -71,6 +72,8 @@ public class UiChange {
             return PIECENAME.QUEEN;
         } else if (piece instanceof Knight) {
             return PIECENAME.KNIGHT; 
+        } else if (piece instanceof Pawn) {
+            return PIECENAME.PAWN; 
         } else {
             return PIECENAME.NULL;
         }

@@ -101,5 +101,13 @@ public abstract class ChessABSMove {
      * @return the ChessSquareModel where the piece wants to go. 
      */
     public ChessSquareModel getSecondSquare() { return this.secondSquare; }
+
+    /**
+     * Returns the move count for a given board instance. In order words, it returns how many moves have been played 
+     * on that game that uses the provided board. 
+     * @param board the ChessBoardModel we want to egt many moves have been played on.
+     * @return The number of moves that have been played. 
+     */
+    public static Integer getMoveCountForBoard(ChessBoardModel board) { return ChessABSMove.boardIdMap.get(board); }
 }
 

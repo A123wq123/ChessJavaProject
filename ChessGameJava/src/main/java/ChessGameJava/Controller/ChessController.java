@@ -7,7 +7,6 @@ import ChessGameJava.Logic.ChessBoardModel;
 import ChessGameJava.Logic.ChessSquareModel;
 import ChessGameJava.Logic.Colour;
 import ChessGameJava.Logic.Moves.ChessABSMove;
-import ChessGameJava.Logic.Pieces.Pawn;
 import ChessGameJava.Utility.Position;
 import ChessGameJava.Utility.UiChange;
 
@@ -46,7 +45,6 @@ public class ChessController {
             System.out.println(validMove);
             if (validMove != null) {
                 listChanges = validMove.processExecuteMove(board);
-                this.board.getSquareModel(this.firstSquare).getPiece().hasMoved = true;
                 this.currentPlayer = this.currentPlayer == Colour.BLACK ? Colour.WHITE : Colour.BLACK;
             }
 

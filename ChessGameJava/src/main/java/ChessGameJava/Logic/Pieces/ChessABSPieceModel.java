@@ -7,7 +7,6 @@ import ChessGameJava.Logic.Moves.BasicMove;
 import ChessGameJava.Logic.Moves.ChessABSMove;
 
 import java.util.ArrayList;
-import java.util.WeakHashMap;
 
 /**
  * Abstract class from which all pieces inherit from. This class keeps track of
@@ -18,7 +17,6 @@ import java.util.WeakHashMap;
  */
 public abstract class ChessABSPieceModel {
     protected Colour colour;
-    public boolean hasMoved = false;
 
     /**
      * Returns all the possibles moves the piece can make by receiving its square

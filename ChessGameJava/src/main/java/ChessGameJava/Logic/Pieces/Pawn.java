@@ -6,15 +6,15 @@ import java.util.Arrays;
 import ChessGameJava.Logic.ChessBoardModel;
 import ChessGameJava.Logic.ChessSquareModel;
 import ChessGameJava.Logic.Colour;
-import ChessGameJava.Logic.Moves.BasicMove;
+import ChessGameJava.Logic.Moves.BasicMovePawn;
 import ChessGameJava.Logic.Moves.ChessABSMove;
 import ChessGameJava.Utility.Position;
 
 public class Pawn extends ChessABSPieceModel{
 
-    protected static Position positionOfLastDoublePlayedPawn = null;
-    protected boolean hasMovedTwoLastTurn = false;
-    protected boolean hasMoved = false;
+    public static Integer turnOfLastPlayedPawn = null;
+    public Integer turnOfDoubleMove = null;
+    public boolean canMoveTwice = true;
 
     /**
      * Constructor of the Pawn class. Assigns the board as well as the colour of the piece.
@@ -35,12 +35,17 @@ public class Pawn extends ChessABSPieceModel{
 
         for(ChessSquareModel square : this.getListAttackingSquares(currentSquare, board)) {
             if(square.getPiece().getColour() == opponentColour) {
-                listMoves.add(new BasicMove(currentSquare, square)); // Refactor this to new special move
+                listMoves.add(new BasicMovePawn(currentSquare, square)); // Refactor this to new special move
             }
         }
 
         listMoves.addAll(this.getMovesInFront(currentSquare, board));
+
+        System.out.println(listMoves.size());
+
         listMoves.addAll(this.getMovesEnPassant(currentSquare, board));
+
+        System.out.println(listMoves.size());
 
         return listMoves;
     }
@@ -124,13 +129,13 @@ public class Pawn extends ChessABSPieceModel{
         ArrayList<ChessABSMove> listMoves = new ArrayList<>();
 
         try {
-            Position position1 = currentSquare.getPosition().sumPosition(0, 1);
-            if(board.getSquareModel(position1).getPiece().getColour() != Colour.NULL) {
-                listMoves.add(new BasicMove(currentSquare, board.getSquareModel(position1)));
-                if(!this.hasMoved) {
-                    Position position2 = currentSquare.getPosition().sumPosition(0, 2);
-                    if(board.getSquareModel(position2).getPiece().getColour() != Colour.NULL) {
-                        listMoves.add(new BasicMove(currentSquare, board.getSquareModel(position2))); // TODO CHANGE TO SPECIAL MOVE
+            Position position1 = currentSquare.getPosition().sumPosition(0, -1);
+            if(board.getSquareModel(position1).getPiece().getColour() == Colour.NULL) {
+                listMoves.add(new BasicMovePawn(currentSquare, board.getSquareModel(position1)));
+                if(this.canMoveTwice) {
+                    Position position2 = currentSquare.getPosition().sumPosition(0, -2);
+                    if(board.getSquareModel(position2).getPiece().getColour() == Colour.NULL) {
+                        listMoves.add(new BasicMovePawn(currentSquare, board.getSquareModel(position2)));
                     }
                 }
             }
@@ -155,13 +160,15 @@ public class Pawn extends ChessABSPieceModel{
         ArrayList<ChessABSMove> listMoves = new ArrayList<>();
 
         try {
-            Position position1 = currentSquare.getPosition().sumPosition(0, -1);
-            if(board.getSquareModel(position1).getPiece().getColour() != Colour.NULL) {
-                listMoves.add(new BasicMove(currentSquare, board.getSquareModel(position1)));
-                if(!this.hasMoved) {
-                    Position position2 = currentSquare.getPosition().sumPosition(0, -2);
-                    if(board.getSquareModel(position2).getPiece().getColour() != Colour.NULL) {
-                        listMoves.add(new BasicMove(currentSquare, board.getSquareModel(position1))); // TODO CHANGE TO SPECIAL MOVE
+            Position position1 = currentSquare.getPosition().sumPosition(0, 1);
+            if(board.getSquareModel(position1).getPiece().getColour() == Colour.NULL) {
+                listMoves.add(new BasicMovePawn(currentSquare, board.getSquareModel(position1)));
+                if(this.canMoveTwice) {
+                    System.out.println("Hello?!");
+                    Position position2 = currentSquare.getPosition().sumPosition(0, 2);
+                    if(board.getSquareModel(position2).getPiece().getColour() == Colour.NULL) {
+                        System.out.println("Hello again?!");
+                        listMoves.add(new BasicMovePawn(currentSquare, board.getSquareModel(position2))); 
                     }
                 }
             }
@@ -173,7 +180,7 @@ public class Pawn extends ChessABSPieceModel{
     }
 
     private ArrayList<ChessABSMove> getMovesEnPassant(ChessSquareModel currentSquare, ChessBoardModel board) {
-        if(Pawn.positionOfLastDoublePlayedPawn == null) {
+        if(Pawn.turnOfLastPlayedPawn == null) {
             return new ArrayList<>();
         }
 
@@ -190,8 +197,11 @@ public class Pawn extends ChessABSPieceModel{
         for (int x : Arrays.asList(-1, 1)) {
             try {
                 Position position = currentSquare.getPosition().sumPosition(x, 0);
-                if(position.equals(Pawn.positionOfLastDoublePlayedPawn)) {
+                if(board.getSquareModel(position).getPiece() instanceof Pawn) {
                     Pawn pawn = (Pawn) board.getSquareModel(position).getPiece();
+                    if(pawn.turnOfDoubleMove == ChessABSMove.getMoveCountForBoard(board)) {
+                        listMoves.add(new BasicMovePawn(currentSquare, board.getSquareModel(position.sumPosition(0, -1)))); // TODO change for en passant move
+                    }
                 }
             } catch (Exception e) {
                 continue;
@@ -207,6 +217,20 @@ public class Pawn extends ChessABSPieceModel{
         }
 
         ArrayList<ChessABSMove> listMoves = new ArrayList<>();
+        
+        for (int x : Arrays.asList(-1, 1)) {
+            try {
+                Position position = currentSquare.getPosition().sumPosition(x, 0);
+                if(board.getSquareModel(position).getPiece() instanceof Pawn) {
+                    Pawn pawn = (Pawn) board.getSquareModel(position).getPiece();
+                    if(pawn.turnOfDoubleMove == ChessABSMove.getMoveCountForBoard(board)) {
+                        listMoves.add(new BasicMovePawn(currentSquare, board.getSquareModel(position.sumPosition(0, 1)))); // TODO change for en passant move
+                    }
+                }
+            } catch (Exception e) {
+                continue;
+            }
+        }
 
         return listMoves;
     }
