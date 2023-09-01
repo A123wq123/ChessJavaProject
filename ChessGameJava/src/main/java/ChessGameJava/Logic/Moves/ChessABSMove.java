@@ -34,12 +34,16 @@ public abstract class ChessABSMove {
      * @return An ArrayList of UiChanges meant to describe the visual changes that should be made to the UI.
      */
     public ArrayList<UiChange> processExecuteMove(ChessBoardModel board) {
+        System.out.println("Called execute move");
+
         if (!ChessABSMove.boardIdMap.containsKey(board)) {
             ChessABSMove.boardIdMap.put(board, 0);
         }
 
         if(this.mouveCount != null) {
             if(this.mouveCount != ChessABSMove.boardIdMap.get(board)) {
+                System.out.println(this.mouveCount);
+                System.out.println(ChessABSMove.boardIdMap.get(board));
                 throw new RuntimeException("Cannot execute move, there is a move that was either not executed or not reverted before");
             }
         } else {
@@ -78,6 +82,8 @@ public abstract class ChessABSMove {
      * @return An ArrayList of UiChanges meant to describe the visual changes that should be made to the UI.
      */
     public ArrayList<UiChange> processRevertMove(ChessBoardModel board) {
+        System.out.println("Called revert move");
+
         if (!ChessABSMove.boardIdMap.containsKey(board)) {
             throw new RuntimeException("This move was never executed, cannot revert it");
         }

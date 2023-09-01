@@ -76,26 +76,53 @@ public class ChessBoardModel {
 
     }
 
-    /** TODO
-     * Checks if a king is under attack, that being either in check or check mate.
-     * @param colourOfAttacker colour of the pieces attacking the king.
-     * @return boolean identifying if the king of the opposite colour of
-     * colourOfAttacker.
+    /**
+     * This method is in charge of checking if a given square is currently being attacked 
+     * by the pieces of the provided colourOfAttacker parameter.
+     * @param observedSquare The square we want to know if it is being attacked.
+     * @param colourOfAttacker The colour of the attacking pieces.
+     * @return True if square is being attacked, false otherwise. 
      */
-    public boolean isKingUnderAttack(Colour colourOfAttacker) {
-        // To check if the kind is under attack.
-        Position positionOfKing = this.getPositionOfKing(colourOfAttacker == Colour.BLACK ? Colour.WHITE : Colour.BLACK).getPosition();
+    public boolean isSquareUnderAttackBy(ChessSquareModel observedSquare, Colour colourOfAttacker) {
         for (int row = 0; row < numberOfRows; row++) {
             for (int column = 0; column < numberOfRows; column++) {
-                ChessSquareModel currentSquare = this.getSquareModel(new Position(column, row));
-                if(currentSquare.getPiece().getColour() == colourOfAttacker) {
-                    if(currentSquare.getPiece().getListAttackingSquares(currentSquare, this).stream().anyMatch(square -> square.getPosition() == positionOfKing)) {
-                        return true;
+                try {
+                    ChessSquareModel currentSquare = this.getSquareModel(new Position(column, row));
+                    if(currentSquare.getPiece().getColour() == colourOfAttacker) {
+                        if(currentSquare.getPiece().getListAttackingSquares(currentSquare, this).stream().anyMatch(square -> square.getPosition().equals(observedSquare.getPosition()))) {
+                            return true;
+                        }
                     }
+                } catch (Exception e) {
+                    continue;
                 }
             }
         }
         return false;
+    }
+
+    /**
+     * This function is in charge of finding the king of a given colour on the board 
+     * and then updating the board attribute that contains it's position. 
+     * @param colourOfKIng The colour of the king we want to update the position for. 
+     */
+    public void updatePositionOfKing(Colour colourOfKIng) {
+        for (int row = 0; row < numberOfRows; row++) {
+            for (int column = 0; column < numberOfRows; column++) {
+                try {
+                    ChessSquareModel currentSquare = this.getSquareModel(new Position(column, row));
+                    if(currentSquare.getPiece() instanceof King) {
+                        if(currentSquare.getPiece().getColour() == Colour.WHITE) {
+                            this.positionOfWhiteKing = currentSquare;
+                        } else {
+                            this.positionOfBlackKing = currentSquare;
+                        }
+                    }
+                } catch (Exception e) {
+                    continue;
+                }
+            }
+        }
     }
 
     /**

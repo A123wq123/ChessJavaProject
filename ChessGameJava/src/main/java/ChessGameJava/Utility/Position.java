@@ -83,4 +83,21 @@ public class Position {
     public boolean equals(Position secondPosition) {
         return this.coordX == secondPosition.getCoordX() && this.coordY == secondPosition.getCoordY();
     }
+
+    public double distanceTo(Position position) {
+        int x = Math.abs(this.coordX - position.getCoordX());
+        int y = Math.abs(this.coordY - position.getCoordY());
+
+        return Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
+    }
+
+    // (0, 7) Rook1
+    // (7, 7) Rook2
+    // (4, 7) King
+    // king rook1 : x = 4 y = 0 -> 4
+    // king rook2 : x = 3 y = 0 -> 3
+
+    // Lets say king is now at (6, 6)
+    // king rook1 : x = 6 y = 1 -> sqrt 37
+    // king rook2 : x = 1 y = 1 -> sqrt 2 Way smaller
 }

@@ -11,25 +11,63 @@ import ChessGameJava.Utility.UiChange;
  */
 public class Castle extends ChessABSMove {
 
-    private ChessSquareModel opponentPawn;
+    protected ChessSquareModel squareRook;
+    protected BasicMove moveKing;
+    protected BasicMove moveRook;
 
-    public Castle(ChessSquareModel firstSquare, ChessSquareModel secondSquare, ChessSquareModel opponentPawn) {
-        super();
-        this.firstSquare = firstSquare;
-        this.secondSquare = secondSquare;
-        this.opponentPawn = opponentPawn;
+    public Castle(ChessSquareModel firstSquareKingChose, ChessSquareModel secondSquareKingChose, ChessSquareModel squareRook, ChessSquareModel squareKing) {
+        this.firstSquare = squareKing;
+        this.secondSquare = secondSquareKingChose;
+        this.squareRook = squareRook;
+
+        this.moveKing = new BasicMove(squareKing, secondSquareKingChose);
+        this.moveRook = new BasicMove(this.squareRook, firstSquareKingChose);
     }
 
     @Override
-    public ArrayList<UiChange> executeMove(ChessBoardModel board) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'executeMove'");
+    public ArrayList<UiChange> processExecuteMove(ChessBoardModel board) {
+        ArrayList<UiChange> listChanges = super.processExecuteMove(board);
+
+        this.squareRook.getPiece().hasMoved = true;
+
+        return listChanges;
+    };
+
+    @Override
+    protected ArrayList<UiChange> executeMove(ChessBoardModel board) {
+        ArrayList<UiChange> listChanges = new ArrayList<>();
+
+        // Execute move
+        listChanges.addAll(this.moveKing.executeMove(board));
+        listChanges.addAll(this.moveRook.executeMove(board));
+
+        board.updatePositionOfKing(this.firstSquare.getPiece().getColour());
+
+        return listChanges;
     }
 
     @Override
-    public ArrayList<UiChange> revertMove(ChessBoardModel board) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'revertMove'");
+    public ArrayList<UiChange> processRevertMove(ChessBoardModel board) {
+        ArrayList<UiChange> listChanges = super.processRevertMove(board);
+
+        if(this.canModifyPieceHasMoved) {
+            this.squareRook.getPiece().hasMoved = false;
+        }
+
+        board.updatePositionOfKing(this.firstSquare.getPiece().getColour());
+
+        return listChanges;
+    }
+
+    @Override
+    protected ArrayList<UiChange> revertMove(ChessBoardModel board) {
+        ArrayList<UiChange> listChanges = new ArrayList<>();
+
+        // Revert move
+        listChanges.addAll(this.moveRook.revertMove(board));
+        listChanges.addAll(this.moveKing.revertMove(board));
+
+        return listChanges;
     }
     
 }

@@ -52,9 +52,7 @@ public abstract class MoveCalculatorHelper {
                         Position dest = new Position(currentPos.getCoordX(), currentPos.getCoordY() + y);
                         ChessSquareModel destSquare = board.getSquareModel(dest);
                         if(!(destSquare.getPiece() instanceof NullPiece)) {
-                            if(destSquare.getPiece().getColour() != pieceColour) {
-                                listSquares.add(destSquare);
-                            }
+                            listSquares.add(destSquare);
                             break;
                         }
                         listSquares.add(destSquare);
@@ -69,9 +67,7 @@ public abstract class MoveCalculatorHelper {
                         Position dest = new Position(currentPos.getCoordX() + x, currentPos.getCoordY());
                         ChessSquareModel destSquare = board.getSquareModel(dest);
                         if(!(destSquare.getPiece() instanceof NullPiece)) {
-                            if(destSquare.getPiece().getColour() != pieceColour) {
-                                listSquares.add(destSquare);
-                            }
+                            listSquares.add(destSquare);
                             break;
                         }
                         listSquares.add(destSquare);
@@ -86,9 +82,7 @@ public abstract class MoveCalculatorHelper {
                         Position dest = new Position(currentPos.getCoordX(), currentPos.getCoordY() - y);
                         ChessSquareModel destSquare = board.getSquareModel(dest);
                         if(!(destSquare.getPiece() instanceof NullPiece)) {
-                            if(destSquare.getPiece().getColour() != pieceColour) {
-                                listSquares.add(destSquare);
-                            }
+                            listSquares.add(destSquare);
                             break;
                         }
                         listSquares.add(destSquare);
@@ -103,9 +97,7 @@ public abstract class MoveCalculatorHelper {
                         Position dest = new Position(currentPos.getCoordX() - x, currentPos.getCoordY());
                         ChessSquareModel destSquare = board.getSquareModel(dest);
                         if(!(destSquare.getPiece() instanceof NullPiece)) {
-                            if(destSquare.getPiece().getColour() != pieceColour) {
-                                listSquares.add(destSquare);
-                            }
+                            listSquares.add(destSquare);
                             break;
                         }
                         listSquares.add(destSquare);
@@ -145,9 +137,7 @@ public abstract class MoveCalculatorHelper {
                         Position dest = new Position(currentPos.getCoordX() + index, currentPos.getCoordY() + index);
                         ChessSquareModel destSquare = board.getSquareModel(dest);
                         if(!(destSquare.getPiece() instanceof NullPiece)) {
-                            if(destSquare.getPiece().getColour() != pieceColour) {
-                                listSquares.add(destSquare);
-                            }
+                            listSquares.add(destSquare);
                             break;
                         }
                         listSquares.add(destSquare);
@@ -162,9 +152,7 @@ public abstract class MoveCalculatorHelper {
                         Position dest = new Position(currentPos.getCoordX() + index, currentPos.getCoordY() - index);
                         ChessSquareModel destSquare = board.getSquareModel(dest);
                         if(!(destSquare.getPiece() instanceof NullPiece)) {
-                            if(destSquare.getPiece().getColour() != pieceColour) {
-                                listSquares.add(destSquare);
-                            }
+                            listSquares.add(destSquare);
                             break;
                         }
                         listSquares.add(destSquare);
@@ -179,9 +167,7 @@ public abstract class MoveCalculatorHelper {
                         Position dest = new Position(currentPos.getCoordX() - index, currentPos.getCoordY() - index);
                         ChessSquareModel destSquare = board.getSquareModel(dest);
                         if(!(destSquare.getPiece() instanceof NullPiece)) {
-                            if(destSquare.getPiece().getColour() != pieceColour) {
-                                listSquares.add(destSquare);
-                            }
+                            listSquares.add(destSquare);
                             break;
                         }
                         listSquares.add(destSquare);
@@ -196,9 +182,7 @@ public abstract class MoveCalculatorHelper {
                         Position dest = new Position(currentPos.getCoordX() - index, currentPos.getCoordY() + index);
                         ChessSquareModel destSquare = board.getSquareModel(dest);
                         if(!(destSquare.getPiece() instanceof NullPiece)) {
-                            if(destSquare.getPiece().getColour() != pieceColour) {
-                                listSquares.add(destSquare);
-                            }
+                            listSquares.add(destSquare);
                             break;
                         }
                         listSquares.add(destSquare);
