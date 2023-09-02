@@ -7,9 +7,9 @@ import ChessGameJava.Logic.ChessSquareModel;
 import ChessGameJava.Utility.UiChange;
 
 /**
- * This class describes a basic chess move. We define a basic move as move the piece on the first square
+ * This class describes a basic move. We define a basic move as move the piece on the first square
  * to the second square. This is only possible if the second square is occupied by a piece of a colour 
- * different than that of teh piece making the move. 
+ * different than that of the piece making the move. 
  * 
  * @Author Charles Degrandpré
  * @Last_Updated 2023-08-31
