@@ -57,11 +57,11 @@ public abstract class ChessABSPieceModel {
      * @return an ArrayList of ChessABSMove the piece can execute. 
      */
     public ArrayList<ChessABSMove> getListMoves(ChessSquareModel currentSquare, ChessBoardModel board) {
-        ArrayList<ChessSquareModel> listSquares = getListAttackingSquares(currentSquare, board);
+        ArrayList<ChessSquareModel> listSquares = this.getListAttackingSquares(currentSquare, board);
         ArrayList<ChessABSMove> listMoves = new ArrayList<>();
 
         for (ChessSquareModel destSquare : listSquares) {
-            if(!checkIfMoveAttacksSameColour(destSquare)) {
+            if(!this.checkIfMoveAttacksSameColour(destSquare)) {
                 listMoves.add(new BasicMove(currentSquare, destSquare));
             }
         }
@@ -91,6 +91,6 @@ public abstract class ChessABSPieceModel {
      * @return boolean indicating if we are attacking a piece of the same colour.
      */
     protected boolean checkIfMoveAttacksSameColour(ChessSquareModel destSquare) {
-        return this.colour.equals(destSquare.getPiece().colour);
+        return this.colour == destSquare.getPiece().colour;
     }
 }

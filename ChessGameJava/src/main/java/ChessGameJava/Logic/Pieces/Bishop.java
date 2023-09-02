@@ -13,7 +13,7 @@ import ChessGameJava.Utility.MoveCalculatorHelper.DIRECTION;
  * possible moves that the bishop can do and all the squares it can attack.
  * 
  * @Author Charles Degrandpré
- * @Last_Updated 2023-08-29
+ * @Last_Updated 2023-09-02
  */
 public class Bishop extends ChessABSPieceModel{
 
