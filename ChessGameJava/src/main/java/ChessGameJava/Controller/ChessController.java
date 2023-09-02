@@ -29,6 +29,14 @@ public class ChessController {
     private Colour currentPlayer;
 
     /**
+     * This method is in charge of determining who the next player should be. it is recommend to override 
+     * this method in personal implementations to create games with multiple players. 
+     */
+    protected void setNextPlayer() {
+        this.currentPlayer = this.currentPlayer == Colour.BLACK ? Colour.WHITE : Colour.BLACK;
+    }
+
+    /**
      * Constructor of the ChessCOntroller class. Initializes the basic state it needs to function. 
      * Notably, this is where the starting player is set, if you wish for it to be changed, you may override 
      * this constructor and set your desired colour of starting player. It also initializes the backend board. 
@@ -123,13 +131,5 @@ public class ChessController {
         }
 
         return validMove;
-    }
-
-    /**
-     * This method is in charge of determining who the next player should be. it is recommend to override 
-     * this method in personal implementations to create games with multiple players. 
-     */
-    protected void setNextPlayer() {
-        this.currentPlayer = this.currentPlayer == Colour.BLACK ? Colour.WHITE : Colour.BLACK;
     }
 }

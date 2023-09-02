@@ -12,7 +12,8 @@ import ChessGameJava.Utility.UiChange;
  * a move from the board. In theory, the state of the board before the execution of the processExecuteMove method should be the same
  * after we call processRevertMove to avoid any unintended side effects when verifying possible moves. 
  * 
- * This class is NOT in charge of verifying if amove is valid, this check is left to the implementation of the pieces. 
+ * This class is NOT in charge of verifying if a move is valid, this check is left to the implementation of the pieces. 
+ * Child classes should only provide a way to execute or revert a move. 
  * 
  * This class also keeps track internally for every game and what move count we are and uses this to determine if some moves have 
  * not been reverted or executed before the current move. The idea being that if we create a move on a board in state A and then 
@@ -28,6 +29,29 @@ public abstract class ChessABSMove {
     protected ChessSquareModel firstSquare;
     protected ChessSquareModel secondSquare;
     protected boolean canModifyPieceHasMoved;
+
+    /**
+     * Getter for the first square, the square where the piece is currently at. 
+     * 
+     * @return the ChessSquareModel where the piece is currently at. 
+     */
+    public ChessSquareModel getFirstSquare() { return this.firstSquare; }
+
+    /**
+     * Getter for the second square, the square where the piece wants to go.
+     * 
+     * @return the ChessSquareModel where the piece wants to go. 
+     */
+    public ChessSquareModel getSecondSquare() { return this.secondSquare; }
+
+    /**
+     * Returns the move count for a given board instance. In other words, it returns how many moves have been played 
+     * on a game using the provided board. 
+     * 
+     * @param board the ChessBoardModel we want to get many moves have been played on.
+     * @return The number of moves that have been played on that board.
+     */
+    public static Integer getMoveCountForBoard(ChessBoardModel board) { return ChessABSMove.boardIdMap.get(board); }
 
     /**
      * This method in in charge of making the necessary calls to process a given request to execute the move object. 
@@ -120,28 +144,5 @@ public abstract class ChessABSMove {
      * @return An ArrayList of UiChanges meant to describe the visual changes that should be made to the UI.
      */
     abstract protected ArrayList<UiChange> revertMove(ChessBoardModel board);
-
-    /**
-     * Getter for the first square, the square where the piece is currently at. 
-     * 
-     * @return the ChessSquareModel where the piece is currently at. 
-     */
-    public ChessSquareModel getFirstSquare() { return this.firstSquare; }
-
-    /**
-     * Getter for the second square, the square where the piece wants to go.
-     * 
-     * @return the ChessSquareModel where the piece wants to go. 
-     */
-    public ChessSquareModel getSecondSquare() { return this.secondSquare; }
-
-    /**
-     * Returns the move count for a given board instance. In other words, it returns how many moves have been played 
-     * on a game using the provided board. 
-     * 
-     * @param board the ChessBoardModel we want to get many moves have been played on.
-     * @return The number of moves that have been played on that board.
-     */
-    public static Integer getMoveCountForBoard(ChessBoardModel board) { return ChessABSMove.boardIdMap.get(board); }
 }
 
