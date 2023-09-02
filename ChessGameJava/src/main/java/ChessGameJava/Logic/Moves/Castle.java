@@ -14,7 +14,7 @@ import ChessGameJava.Utility.UiChange;
  * the tower and then moving the tower to the first square the king has visited. 
  * 
  * @Author Charles Degrandpré
- * @Last_Updated 2023-09-01
+ * @Last_Updated 2023-09-02
  */
 public class Castle extends ChessABSMove {
 
