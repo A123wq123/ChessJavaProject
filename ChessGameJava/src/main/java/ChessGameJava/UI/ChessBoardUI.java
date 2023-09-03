@@ -4,8 +4,8 @@ import javax.swing.*;
 
 import ChessGameJava.Controller.ChessController;
 import ChessGameJava.Logic.Colour;
+import ChessGameJava.Utility.PieceName;
 import ChessGameJava.Utility.UiChange;
-import ChessGameJava.Utility.UiChange.PIECENAME;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -71,7 +71,7 @@ public class ChessBoardUI extends JFrame{
      * @param colour The Colour of the piece. 
      * @return The string representing the given piece. 
      */
-    private String getPieceName(PIECENAME pieceName, Colour colour) {
+    private String getPieceName(PieceName pieceName, Colour colour) {
         switch (pieceName) {
             case KING:
                 return colour == Colour.BLACK ? "\u265A" : "\u2654";
@@ -121,24 +121,24 @@ public class ChessBoardUI extends JFrame{
     private void addWhitePieces() {
         // Add Pawns
         for (int i = 0; i < numberOfRows; i++) {
-            getSquareUI(i, 6).setText(this.getPieceName(PIECENAME.PAWN, Colour.WHITE));
+            getSquareUI(i, 6).setText(this.getPieceName(PieceName.PAWN, Colour.WHITE));
         }
         // Add towers
         for (int i  = 0; i < 2; i++) {
-            getSquareUI(i*7, 7).setText(this.getPieceName(PIECENAME.ROOK, Colour.WHITE));
+            getSquareUI(i*7, 7).setText(this.getPieceName(PieceName.ROOK, Colour.WHITE));
         }
         // Add knights
         for (int i  = 0; i < 2; i++) {
-            getSquareUI(1+i*5, 7).setText(this.getPieceName(PIECENAME.KNIGHT, Colour.WHITE));
+            getSquareUI(1+i*5, 7).setText(this.getPieceName(PieceName.KNIGHT, Colour.WHITE));
         }
         // Add bishops
         for (int i  = 0; i < 2; i++) {
-            getSquareUI(2+i*3, 7).setText(this.getPieceName(PIECENAME.BISHOP, Colour.WHITE));
+            getSquareUI(2+i*3, 7).setText(this.getPieceName(PieceName.BISHOP, Colour.WHITE));
         }
         // Add queen
-        getSquareUI(3, 7).setText(this.getPieceName(PIECENAME.QUEEN, Colour.WHITE));
+        getSquareUI(3, 7).setText(this.getPieceName(PieceName.QUEEN, Colour.WHITE));
         // Add king
-        getSquareUI(4, 7).setText(this.getPieceName(PIECENAME.KING, Colour.WHITE));
+        getSquareUI(4, 7).setText(this.getPieceName(PieceName.KING, Colour.WHITE));
     }
 
     /**
@@ -148,24 +148,24 @@ public class ChessBoardUI extends JFrame{
     private void addBlackPieces() {
         // Add Pawns
         for (int i = 0; i < numberOfRows; i++) {
-            getSquareUI(i, 1).setText(this.getPieceName(PIECENAME.PAWN, Colour.BLACK));
+            getSquareUI(i, 1).setText(this.getPieceName(PieceName.PAWN, Colour.BLACK));
         }
         // Add towers
         for (int i  = 0; i < 2; i++) {
-            getSquareUI(i*7, 0).setText(this.getPieceName(PIECENAME.ROOK, Colour.BLACK));
+            getSquareUI(i*7, 0).setText(this.getPieceName(PieceName.ROOK, Colour.BLACK));
         }
         // Add knights
         for (int i  = 0; i < 2; i++) {
-            getSquareUI(1+i*5, 0).setText(this.getPieceName(PIECENAME.KNIGHT, Colour.BLACK));
+            getSquareUI(1+i*5, 0).setText(this.getPieceName(PieceName.KNIGHT, Colour.BLACK));
         }
         // Add bishops
         for (int i  = 0; i < 2; i++) {
-            getSquareUI(2+i*3, 0).setText(this.getPieceName(PIECENAME.BISHOP, Colour.BLACK));
+            getSquareUI(2+i*3, 0).setText(this.getPieceName(PieceName.BISHOP, Colour.BLACK));
         }
         // Add queen
-        getSquareUI(3, 0).setText(this.getPieceName(PIECENAME.QUEEN, Colour.BLACK));
+        getSquareUI(3, 0).setText(this.getPieceName(PieceName.QUEEN, Colour.BLACK));
         // Add king
-        getSquareUI(4, 0).setText(this.getPieceName(PIECENAME.KING, Colour.BLACK));
+        getSquareUI(4, 0).setText(this.getPieceName(PieceName.KING, Colour.BLACK));
     }
 
     /**
