@@ -3,7 +3,6 @@ package ChessGameJava.Logic.Pieces;
 import ChessGameJava.Logic.ChessBoardModel;
 import ChessGameJava.Logic.ChessSquareModel;
 import ChessGameJava.Logic.Colour;
-import ChessGameJava.Logic.Moves.ChessABSMove;
 
 import java.util.ArrayList;
 
@@ -17,7 +16,7 @@ import java.util.ArrayList;
  * All instances of this class have the Colour of NULL.
  * 
  * @Author Charles Degrandpré
- * @Last_Updated 2022-12-23
+ * @Last_Updated 2023-09-02
  */
 public class NullPiece extends ChessABSPieceModel {
     /**
