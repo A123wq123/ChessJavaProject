@@ -2,11 +2,14 @@ package ChessGameJava.Controller;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import ChessGameJava.Logic.ChessBoardModel;
 import ChessGameJava.Logic.ChessSquareModel;
 import ChessGameJava.Logic.Colour;
 import ChessGameJava.Logic.Moves.ChessABSMove;
+import ChessGameJava.Logic.Pieces.ChessABSPieceModel;
+import ChessGameJava.Utility.PieceName;
 import ChessGameJava.Utility.Position;
 import ChessGameJava.Utility.UiChange;
 
@@ -77,6 +80,8 @@ public class ChessController {
 
             this.firstPosition = null;
             this.secondPosition = null;
+
+            System.out.println(this.determineGameState());
         }
         else if (board.getSquareModel(click).getPiece().getColour() == this.currentPlayer){
             this.firstPosition = click;
@@ -131,5 +136,53 @@ public class ChessController {
         }
 
         return validMove;
+    }
+
+    protected GameState determineGameState() {
+        HashMap<PieceName, Integer> mapStateCount = new HashMap<>();
+
+        for(ChessSquareModel square : this.board.getSquareList()) {
+            PieceName pieceName = UiChange.getNameFromABSPiece(square.getPiece());
+            mapStateCount.put(pieceName, mapStateCount.getOrDefault(pieceName, 0) + 1);
+        }
+
+        Integer size = mapStateCount.size();
+        if(size == 2) {
+            if(mapStateCount.containsKey(PieceName.BISHOP) || mapStateCount.containsKey(PieceName.KNIGHT)) {
+                return GameState.DRAW;
+            }
+        } else if (size == 1) {
+            return GameState.DRAW;
+        }
+
+        Colour colourOfAttacker = currentPlayer == Colour.WHITE ? Colour.BLACK : Colour.WHITE;
+
+        if(this.board.isSquareUnderAttackBy(this.board.getSquareOfKing(this.currentPlayer), colourOfAttacker)) {
+            boolean mate = this.isPlayerInMate(colourOfAttacker);
+            System.out.println(mate);
+            if(mate) {
+                return this.currentPlayer == Colour.WHITE ? GameState.BLACK_WIN : GameState.WHITE_WIN;
+            }
+        }
+
+        return GameState.ONGOING;
+    }
+
+    protected boolean isPlayerInMate(Colour colourOfAttacker) {
+        for(ChessSquareModel square : this.board.getSquareList()) {
+            ChessABSPieceModel piece = square.getPiece();
+            if(piece.getColour() == this.currentPlayer) {
+                for(ChessABSMove move : piece.getListMoves(square, board)) {
+                    move.processExecuteMove(board);
+                    if(!this.board.isSquareUnderAttackBy(this.board.getSquareOfKing(this.currentPlayer), colourOfAttacker)) {
+                        move.processRevertMove(board);
+                        return false;
+                    }
+                    move.processRevertMove(board);
+                }
+            }
+        }
+
+        return true; 
     }
 }
