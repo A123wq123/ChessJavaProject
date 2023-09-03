@@ -130,7 +130,7 @@ public class ChessSquareUI extends JLabel implements MouseListener {
      * colour, to either white or black depending on its position. 
      */
     private void setBlackOrWHite() {
-        if ((position.sumCoordinates())%2 == 0) {
+        if ((position.getCoordX() + position.getCoordY())%2 == 0) {
             this.setBackground(Color.WHITE);
         } else {
             this.setBackground(Color.LIGHT_GRAY);
