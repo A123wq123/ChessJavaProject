@@ -19,7 +19,6 @@ public class Queen extends ChessABSPieceModel {
     /**
      * Constructor of the queen class. Assigns the colour of the piece.
      * 
-     * @param board the instance of the chess board.
      * @param colourOfPiece the colour of the queen.
      */
     public Queen(Colour colourOfPiece) {
