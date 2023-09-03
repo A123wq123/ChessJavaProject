@@ -59,8 +59,7 @@ public class ChessBoardUI extends JFrame{
             if(change.getIsHighlightedMove()) {
                 square.highlight();
             } else {
-                square.pieceName = this.getPieceName(change.getPieceName(), change.getColour());
-                square.setText(square.pieceName);
+                square.setText(this.getPieceName(change.getPieceName(), change.getColour()));
             }
         }
     }

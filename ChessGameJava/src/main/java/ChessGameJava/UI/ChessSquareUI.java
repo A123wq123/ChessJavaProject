@@ -15,53 +15,53 @@ import java.util.ArrayList;
 /**
  * Class representing a chess square on the User Interface side of this project. This class is
  * capable of rendering a chess square on the UI and manage the piece present on it.
- * This class also manages the events necessary to this project such as mouse click and
- * pressed in order to move the pieces. This lass extends the JLabel class from the swing package
- * and implements the MouseListener interface from the same package.
+ * This class extends the JLabel class from the swing package and implements the MouseListener interface 
+ * from the same package.
+ * 
+ * For now, we only trigger behavior on the mouse click but this behavior can be overridden. 
+ * 
  * @Author Charles Degrandpré
- * @Last_Updated 2022-12-23
+ * @Last_Updated 2023-09-03
  */
 public class ChessSquareUI extends JLabel implements MouseListener {
 
     public Position position;
-    public String pieceName;
     private ChessController controller;
     private ChessBoardUI uiBoard;
 
     /**
      * Constructor of a ChessSquareUI component. Sets every variable necessary for proper ui
      * style except the name of the piece standing on it.
+     * 
      * @param column the column of the square, which is also its x coordinate.
      * @param row the row of the square, which is also its y coordinate.
+     * @param controller The ChessController instance managing this game. 
+     * @param uiBoard The ChessBoardUI instance the ChessSquareUI is part of. 
      */
     public ChessSquareUI(int column, int row, ChessController controller, ChessBoardUI uiBoard) {
-        position = new Position(column, row);
-        //pieceName = String.valueOf("\u2654");
-        pieceName = null;
-        //String noName = "\u2654";
+        this.position = new Position(column, row);
         this.controller = controller;
         this.uiBoard = uiBoard;
 
-        if ((position.sumCoordinates())%2 == 0) {
-            this.setBackground(Color.WHITE);
-        }
-        else {
-            this.setBackground(Color.LIGHT_GRAY);
-        }
+        this.setBlackOrWHite();
 
         this.setOpaque(true);
 
         this.setVerticalAlignment(0);
         this.setHorizontalAlignment(0);
         this.setFont(new Font(Font.MONOSPACED,Font.PLAIN, 80));
-        this.setText(pieceName);
+        this.setText(null);
 
         this.addMouseListener(this);
     }
 
-    /** TODO
+    /**
      * Catches and process the event linked with a mouse button clicked in order
-     * to correctly mouve a piece of the chess board.
+     * to correctly move a piece of the chess board.
+     * 
+     * It makes a call to ChessController.processClick() to obtain a series of 
+     * UIChanges that it sends to ChessBoardUI.makeChanges to apply them. 
+     * 
      * @param e the event to be processed
      */
     @Override
@@ -72,53 +72,47 @@ public class ChessSquareUI extends JLabel implements MouseListener {
     }
 
     /**
-     * TODO
-     * Catches and process the event linked with a mouse button pressed in order
-     * to correctly mouve a piece of the chess board.
+     * Event handler for mouse press. Does nothing. 
+     * 
      * @param e the event to be processed
      */
     @Override
     public void mousePressed(MouseEvent e) {
-
+        // Do nothing.
     }
 
     /**
-     * TODO
-     * Catches and process the event linked with a mouse button released in order
-     * to correctly mouve a piece of the chess board.
+     * Event handler for mouse release. Does nothing.
+     * 
      * @param e the event to be processed
      */
     @Override
     public void mouseReleased(MouseEvent e) {
-
+        // Do nothing
     }
 
     /**
-     * TODO
-     * Catches and process the event linked with a mouse button entered in order
-     * to correctly mouve a piece of the chess board. This is for when a mouse enters the UI
-     * area for a square, you may see it as when we are hovering a square.
+     * Event handler for mouse entered. Does nothing.
+     * 
      * @param e the event to be processed
      */
     @Override
     public void mouseEntered(MouseEvent e) {
-
+        // Do nothing
     }
 
     /**
-     * TODO
-     * Catches and process the event linked with a mouse button exited in order
-     * to correctly mouve a piece of the chess board. This is for when a mouse leaves the UI
-     * area for a square, you may see it as when we are no longer hovering a square.
+     * Event handler for mouse exited. Does nothing.
+     * 
      * @param e the event to be processed
      */
     @Override
     public void mouseExited(MouseEvent e) {
-
+        // Do nothing
     }
 
     /**
-     * Highlights a the current square by changing its colour. 
+     * Highlights self by changing its colour. 
      */
     public void highlight() {
         this.setBackground(Color.GRAY);
@@ -128,6 +122,14 @@ public class ChessSquareUI extends JLabel implements MouseListener {
      * Removes the highlight on a square by changing back its colour. 
      */
     public void removeHighlight() {
+        this.setBlackOrWHite();
+    }
+
+    /**
+     * This method sets the colour of the square, its background 
+     * colour, to either white or black depending on its position. 
+     */
+    private void setBlackOrWHite() {
         if ((position.sumCoordinates())%2 == 0) {
             this.setBackground(Color.WHITE);
         } else {
