@@ -1,12 +1,10 @@
 package ChessGameJava;
 
-// This is the main, we should only have it do "Launch Game" by the end of the project.
-
 import ChessGameJava.UI.ChessBoardUI;
 
-
 /**
- * Simple main to launch the program.
+ * Launches a simple regular chess game. It initiates the UI of this application by creating a 
+ * new ChessBoardUi. 
  */
 public class Main {
     public static void main(String[] args) {
