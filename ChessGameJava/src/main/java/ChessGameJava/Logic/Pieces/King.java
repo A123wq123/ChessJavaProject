@@ -132,7 +132,7 @@ public class King extends ChessABSPieceModel {
                                     if(positionRook.distanceTo(currentSquare.getPosition()) > positionRook.distanceTo(move2.getSecondSquare().getPosition())) { 
                                         Castle castleMove = new Castle(move1.getSecondSquare(), move2.getSecondSquare(), board.getSquareModel(positionRook), currentSquare);
                                         castleMove.processExecuteMove(board);
-                                        if(!board.isSquareUnderAttackBy(board.getPositionOfKing(this.colour), colourOfAttacker)) {
+                                        if(!board.isSquareUnderAttackBy(board.getSquareOfKing(this.colour), colourOfAttacker)) {
                                             listMoves.add(castleMove);
                                         }
                                         castleMove.processRevertMove(board);

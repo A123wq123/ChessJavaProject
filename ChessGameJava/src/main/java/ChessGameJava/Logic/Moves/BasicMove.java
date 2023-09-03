@@ -41,6 +41,8 @@ public class BasicMove extends ChessABSMove{
     protected ArrayList<UiChange> executeMove(ChessBoardModel board) {
         ArrayList<UiChange> listChanges = new ArrayList<>();
 
+        System.out.println(String.format("x: %s, y: %s", temp.getPosition().getCoordX(), temp.getPosition().getCoordY()));
+
         board.swappSquare(this.temp);
         board.swappSquares(this.firstSquare.getPosition(), this.temp.getPosition());
 

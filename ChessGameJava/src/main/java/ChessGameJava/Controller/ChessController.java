@@ -121,7 +121,7 @@ public class ChessController {
 
             if(validMove != null) {
                 validMove.processExecuteMove(board);
-                if(board.isSquareUnderAttackBy(board.getPositionOfKing(currentPlayer), currentPlayer == Colour.BLACK ? Colour.WHITE : Colour.BLACK)) {
+                if(board.isSquareUnderAttackBy(board.getSquareOfKing(currentPlayer), currentPlayer == Colour.BLACK ? Colour.WHITE : Colour.BLACK)) {
                     validMove.processRevertMove(board);
                     validMove = null;
                 } else {
