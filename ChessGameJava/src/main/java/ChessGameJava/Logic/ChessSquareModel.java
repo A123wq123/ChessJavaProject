@@ -6,20 +6,32 @@ import ChessGameJava.Utility.Position;
 
 /**
  * Class representing a chess square on the logic side of this project. This class is in charge of
- * managing the piece it possesses weather that piece is a nullPiece or a concrete piece. This class
- * can obtain its position, obtain its piece, remove its piece and acts as a middle man between
+ * managing the piece it possesses wether that piece is a nullPiece or a concrete piece. This class
+ * can obtain its position, obtain its piece, provide a copy of itself and act as a middle man between
  * the chess board and the pieces.
+ * 
  * @Author Charles Degrandpré
- * @Last_Updated 2022-12-23
+ * @Last_Updated 2023-09-03
  */
 public class ChessSquareModel {
 
-    private ChessABSPieceModel piece;
-    private Position position;
+    protected ChessABSPieceModel piece;
+    protected Position position;
+
+    /**
+     * @return the Position of the square.
+     */
+    public Position getPosition() { return position; }
+
+    /**
+     * @return the ChessABSPiece on the square.
+     */
+    public ChessABSPieceModel getPiece() { return piece; }
 
     /**
      * Constructor of a ChessSquareModel instance. Initiates the piece attribute
      * to a NullPiece instance.
+     * 
      * @param column the column the square is positioned at, also its x coordinate.
      * @param row the row the square is positioned at, also its y coordinate.
      */
@@ -29,43 +41,13 @@ public class ChessSquareModel {
     }
 
     /**
-     * @return the Position element of the square.
+     * Copy method that returns a copy of self. 
+     * 
+     * @return A ChessSquareModel copy of self. 
      */
-    public Position getPosition() { return position; }
-
-    /**
-     * @return the piece positioned on the square.
-     */
-    public ChessABSPieceModel getPiece() { return piece; }
-
-    /**
-     * Adds a piece onto a square, takes a ChessABSPieceModel
-     * element to do so.
-     * @param newPiece the piece to add to the square.
-     */
-    public void addPiece(ChessABSPieceModel newPiece) {
-        piece = newPiece;
-    }
-
-    /** TODO
-     * Remove a piece from a square and replaces it with a NullPiece instance.
-     */
-    public void removePiece() {
-        piece = new NullPiece();
-    }
-
-    /**
-     * Changes the position of a give ChessUISquare and is used when we need to make
-     * a move on the chess board.
-     * @param newPosition the new position the ChessSquare will be located at.
-     */
-    public void changePosition(Position newPosition) {
-        position = newPosition;
-    }
-
     public ChessSquareModel copy() {
         ChessSquareModel copy = new ChessSquareModel(this.position.getCoordX(), this.position.getCoordY());
-        copy.addPiece(this.getPiece());
+        copy.piece = this.getPiece();
         return copy;
     }
 }

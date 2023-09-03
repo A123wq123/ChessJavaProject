@@ -12,12 +12,12 @@ import ChessGameJava.Utility.UiChange;
 /**
  * Class representing a chess board on the logic side of this project. This class is in charge of
  * managing the board and every square that is placed within it. This class contains an array of
- * arrays representing the board, the width of teh board and the position of both kings to optimise
+ * arrays representing the board, the width of teh board and the position of both kings to optimize
  * processing time. This class is in charge of checking for board wide events such as if a king
  * is under attack, removing a piece or adding a piece.
  * 
  * @Author Charles Degrandpré
- * @Last_Updated 2022-12-23
+ * @Last_Updated 2023-09-03
  */
 public class ChessBoardModel {
     public final static int numberOfRows = 8;
@@ -146,37 +146,37 @@ public class ChessBoardModel {
          // Add Pawns
         for (int i = 0; i < numberOfRows; i++) {
             ChessSquareModel square = getSquareModel(new Position(i, 6));
-            square.addPiece(new Pawn(Colour.WHITE));
+            square.piece = new Pawn(Colour.WHITE);
         }
 
         // Add towers
         for (int i  = 0; i < 2; i++) {
             ChessSquareModel square = getSquareModel(new Position(i*7, 7));
-            square.addPiece(new Rook(Colour.WHITE));
+            square.piece = new Rook(Colour.WHITE);
         }
 
         // Add knights
         for (int i  = 0; i < 2; i++) {
             ChessSquareModel square = getSquareModel(new Position(1+i*5, 7));
-            square.addPiece(new Knight(Colour.WHITE));
+            square.piece = new Knight(Colour.WHITE);
         }
 
         // Add bishops
         for (int i  = 0; i < 2; i++) {
             ChessSquareModel square = getSquareModel(new Position(2+i*3, 7));
-            square.addPiece(new Bishop(Colour.WHITE));
+            square.piece = new Bishop(Colour.WHITE);
         }
 
         // Add queen
         {
             ChessSquareModel square = getSquareModel(new Position(3, 7));
-            square.addPiece(new Queen(Colour.WHITE));
+            square.piece = new Queen(Colour.WHITE);
         }
 
         // Add king
         {
             ChessSquareModel square = getSquareModel(new Position(4, 7));
-            square.addPiece(new King(Colour.WHITE));
+            square.piece = new King(Colour.WHITE);
             this.squareOfWhiteKing = square;
         }
     }
@@ -191,37 +191,37 @@ public class ChessBoardModel {
         // Add Pawns
         for (int i = 0; i < numberOfRows; i++) {
             ChessSquareModel square = getSquareModel(new Position(i, 1));
-            square.addPiece(new Pawn(Colour.BLACK));
+            square.piece = new Pawn(Colour.BLACK);
         }
 
         // Add towers
         for (int i  = 0; i < 2; i++) {
             ChessSquareModel square = getSquareModel(new Position(i*7, 0));
-            square.addPiece(new Rook(Colour.BLACK));
+            square.piece = new Rook(Colour.BLACK);
         }
 
         // Add knights
         for (int i  = 0; i < 2; i++) {
             ChessSquareModel square = getSquareModel(new Position(1+i*5, 0));
-            square.addPiece(new Knight(Colour.BLACK));
+            square.piece = new Knight(Colour.BLACK);
         }
 
         // Add bishops
         for (int i  = 0; i < 2; i++) {
             ChessSquareModel square = getSquareModel(new Position(2+i*3, 0));
-            square.addPiece(new Bishop(Colour.BLACK));
+            square.piece = new Bishop(Colour.BLACK);
         }
 
         // Add queen
         {
             ChessSquareModel square = getSquareModel(new Position(3, 0));
-            square.addPiece(new Queen(Colour.BLACK));
+            square.piece = new Queen(Colour.BLACK);
         }
 
         // Add king
         {
             ChessSquareModel square = getSquareModel(new Position(4, 0));
-            square.addPiece(new King(Colour.BLACK));
+            square.piece = new King(Colour.BLACK);
             this.squareOfBlackKing = square;
         }
     }
@@ -254,8 +254,8 @@ public class ChessBoardModel {
         squareList[first.getCoordY() * numberOfRows + first.getCoordX()] = this.getSquareModel(second);
         squareList[second.getCoordY() * numberOfRows + second.getCoordX()] = firstSquare;
 
-        this.getSquareModel(first).changePosition(first);
-        this.getSquareModel(second).changePosition(second);
+        this.getSquareModel(first).position = first;
+        this.getSquareModel(second).position = second;
     }
 
     /**

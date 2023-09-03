@@ -108,17 +108,10 @@ public class King extends ChessABSPieceModel {
             return listMoves;
         }
 
-        for (int row = 0; row < ChessBoardModel.numberOfRows; row++) {
-            for (int column = 0; column < ChessBoardModel.numberOfRows; column++) {
-                try {
-                    Position position = new Position(column, row);
-                    ChessABSPieceModel piece = board.getSquareModel(position).getPiece();
-                    if(piece instanceof Rook && !piece.hasMoved && piece.getColour() == this.colour) {
-                        positionRooks.add(position);
-                    }
-                } catch (Exception e) {
-                    continue;
-                }
+        for(ChessSquareModel square : board.getSquareList()) {
+            ChessABSPieceModel piece = square.getPiece();
+            if(piece instanceof Rook && !piece.hasMoved && piece.getColour() == this.colour) {
+                positionRooks.add(square.getPosition());
             }
         }
 
