@@ -35,7 +35,7 @@ public class Rook extends ChessABSPieceModel {
     public ArrayList<ChessSquareModel> getListAttackingSquares(ChessSquareModel currentSquare, ChessBoardModel board) {
         ArrayList<ChessSquareModel> listSquares = new ArrayList<>();
         for (DIRECTION direction : MoveCalculatorHelper.lines) {
-            listSquares.addAll(MoveCalculatorHelper.calculateLine(direction, currentSquare.getPosition(), currentSquare.getPiece().getColour(), board));
+            listSquares.addAll(MoveCalculatorHelper.calculateLine(direction, currentSquare.getPosition(), board));
         }
         return listSquares;
     }

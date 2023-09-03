@@ -7,12 +7,12 @@ import java.util.List;
 import ChessGameJava.Logic.ChessBoardModel;
 import ChessGameJava.Logic.ChessSquareModel;
 import ChessGameJava.Logic.Colour;
-import ChessGameJava.Logic.Pieces.NullPiece;
 
 /**
- * A class that acts as a helper to calculate various basic lines. 
+ * A class that acts as a helper to calculate various basic lines and moves on a board. 
+ * 
  * @Author Charles Degrandpré
- * @Last_Updated 2022-12-23
+ * @Last_Updated 2023-09-03
  */
 public abstract class MoveCalculatorHelper {
     public final static List<DIRECTION> lines = Arrays.asList(DIRECTION.NORTH, DIRECTION.EAST, DIRECTION.SOUTH, DIRECTION.WEST);
@@ -32,18 +32,21 @@ public abstract class MoveCalculatorHelper {
      * Helper function to calculate all the squares on a line from the board that can be considered as a valid 
      * square to move the piece to. It checks if the path to the square is empty and if we are trying to attack 
      * a piece of the correct colour. 
-     * @param direction The direction we want to calculate for. 
-     * @param currentPos The current position we want to calculate from.
-     * @param pieceColour The color of our piece on the currentPos.
-     * @param board The current board.
+     * 
+     * As a note, it considers all squares on a line of one of the 4 cardinal directions up to and including 
+     * the first occupied square. 
+     * 
+     * @param direction The DIRECTION we want to calculate for. 
+     * @param currentPos The Position we want to calculate from.
+     * @param board The current ChessBoardModel we want to calculate on.
      * @return And ArrayList<ChessSquareModel> containing all the valid squares. 
      */
-    public static ArrayList<ChessSquareModel> calculateLine(DIRECTION direction, Position currentPos, Colour pieceColour, ChessBoardModel board) {
-        ArrayList<ChessSquareModel> listSquares = new ArrayList<>();
-
+    public static ArrayList<ChessSquareModel> calculateLine(DIRECTION direction, Position currentPos, ChessBoardModel board) {
         if(!lines.contains(direction)) {
             throw new RuntimeException("Incorrect parameters. Direction specified isn't part of lines.");
         }
+
+        ArrayList<ChessSquareModel> listSquares = new ArrayList<>();
 
         switch (direction) {
             case NORTH:
@@ -51,11 +54,10 @@ public abstract class MoveCalculatorHelper {
                     try {
                         Position dest = new Position(currentPos.getCoordX(), currentPos.getCoordY() + y);
                         ChessSquareModel destSquare = board.getSquareModel(dest);
-                        if(!(destSquare.getPiece() instanceof NullPiece)) {
-                            listSquares.add(destSquare);
+                        listSquares.add(destSquare);
+                        if(destSquare.getPiece().getColour() != Colour.NULL) {
                             break;
                         }
-                        listSquares.add(destSquare);
                     } catch (Exception e) {
                         break;
                     }
@@ -66,11 +68,10 @@ public abstract class MoveCalculatorHelper {
                     try {
                         Position dest = new Position(currentPos.getCoordX() + x, currentPos.getCoordY());
                         ChessSquareModel destSquare = board.getSquareModel(dest);
-                        if(!(destSquare.getPiece() instanceof NullPiece)) {
-                            listSquares.add(destSquare);
+                        listSquares.add(destSquare);
+                        if(destSquare.getPiece().getColour() != Colour.NULL) {
                             break;
                         }
-                        listSquares.add(destSquare);
                     } catch (Exception e) {
                         break;
                     }
@@ -81,11 +82,10 @@ public abstract class MoveCalculatorHelper {
                     try {
                         Position dest = new Position(currentPos.getCoordX(), currentPos.getCoordY() - y);
                         ChessSquareModel destSquare = board.getSquareModel(dest);
-                        if(!(destSquare.getPiece() instanceof NullPiece)) {
-                            listSquares.add(destSquare);
+                        listSquares.add(destSquare);
+                        if(destSquare.getPiece().getColour() != Colour.NULL) {
                             break;
                         }
-                        listSquares.add(destSquare);
                     } catch (Exception e) {
                         break;
                     }
@@ -96,11 +96,10 @@ public abstract class MoveCalculatorHelper {
                     try {
                         Position dest = new Position(currentPos.getCoordX() - x, currentPos.getCoordY());
                         ChessSquareModel destSquare = board.getSquareModel(dest);
-                        if(!(destSquare.getPiece() instanceof NullPiece)) {
-                            listSquares.add(destSquare);
+                        listSquares.add(destSquare);
+                        if(destSquare.getPiece().getColour() != Colour.NULL) {
                             break;
                         }
-                        listSquares.add(destSquare);
                     } catch (Exception e) {
                         break;
                     }
@@ -114,21 +113,24 @@ public abstract class MoveCalculatorHelper {
     }
 
     /**
-     * Helper function to calculate all the squares on a line from the board that can be considered as a valid 
+     * Helper function to calculate all the squares on a diagonal from the board that can be considered as a valid 
      * square to move the piece to. It checks if the path to the square is empty and if we are trying to attack 
      * a piece of the correct colour. 
-     * @param direction The direction we want to calculate for. 
-     * @param currentPos The current position we want to calculate from.
-     * @param pieceColour The color of our piece on the currentPos.
-     * @param board The current board.
+     * 
+     * As a note, we only consider diagonals to be the line of squares forming a 45 degree angle with either 
+     * two cardinal lines it is closest to. 
+     * 
+     * @param direction The DIRECTION we want to calculate for. 
+     * @param currentPos The Position we want to calculate from.
+     * @param board The current ChessBoardModel we want to calculate on.
      * @return And ArrayList<ChessSquareModel> containing all the valid squares. 
      */
-    public static ArrayList<ChessSquareModel> calculateDiagonal(DIRECTION direction, Position currentPos, Colour pieceColour, ChessBoardModel board) {
-        ArrayList<ChessSquareModel> listSquares = new ArrayList<>();
-
+    public static ArrayList<ChessSquareModel> calculateDiagonal(DIRECTION direction, Position currentPos, ChessBoardModel board) {
         if(!diagonals.contains(direction)) {
             throw new RuntimeException("Incorrect parameters. Direction specified isn't part of diagonals.");
         }
+
+        ArrayList<ChessSquareModel> listSquares = new ArrayList<>();
 
         switch (direction) {
             case NORTH_EAST:
@@ -136,11 +138,10 @@ public abstract class MoveCalculatorHelper {
                     try {
                         Position dest = new Position(currentPos.getCoordX() + index, currentPos.getCoordY() + index);
                         ChessSquareModel destSquare = board.getSquareModel(dest);
-                        if(!(destSquare.getPiece() instanceof NullPiece)) {
-                            listSquares.add(destSquare);
+                        listSquares.add(destSquare);
+                        if(destSquare.getPiece().getColour() != Colour.NULL) {
                             break;
                         }
-                        listSquares.add(destSquare);
                     } catch (Exception e) {
                         break;
                     }
@@ -151,11 +152,10 @@ public abstract class MoveCalculatorHelper {
                     try {
                         Position dest = new Position(currentPos.getCoordX() + index, currentPos.getCoordY() - index);
                         ChessSquareModel destSquare = board.getSquareModel(dest);
-                        if(!(destSquare.getPiece() instanceof NullPiece)) {
-                            listSquares.add(destSquare);
+                        listSquares.add(destSquare);
+                        if(destSquare.getPiece().getColour() != Colour.NULL) {
                             break;
                         }
-                        listSquares.add(destSquare);
                     } catch (Exception e) {
                         break;
                     }
@@ -166,11 +166,10 @@ public abstract class MoveCalculatorHelper {
                     try {
                         Position dest = new Position(currentPos.getCoordX() - index, currentPos.getCoordY() - index);
                         ChessSquareModel destSquare = board.getSquareModel(dest);
-                        if(!(destSquare.getPiece() instanceof NullPiece)) {
-                            listSquares.add(destSquare);
+                        listSquares.add(destSquare);
+                        if(destSquare.getPiece().getColour() != Colour.NULL) {
                             break;
                         }
-                        listSquares.add(destSquare);
                     } catch (Exception e) {
                         break;
                     }
@@ -181,11 +180,10 @@ public abstract class MoveCalculatorHelper {
                     try {
                         Position dest = new Position(currentPos.getCoordX() - index, currentPos.getCoordY() + index);
                         ChessSquareModel destSquare = board.getSquareModel(dest);
-                        if(!(destSquare.getPiece() instanceof NullPiece)) {
-                            listSquares.add(destSquare);
+                        listSquares.add(destSquare);
+                        if(destSquare.getPiece().getColour() != Colour.NULL) {
                             break;
                         }
-                        listSquares.add(destSquare);
                     } catch (Exception e) {
                         break;
                     }

@@ -34,7 +34,7 @@ public class Bishop extends ChessABSPieceModel{
     public ArrayList<ChessSquareModel> getListAttackingSquares(ChessSquareModel currentSquare, ChessBoardModel board) {
         ArrayList<ChessSquareModel> listSquares = new ArrayList<>();
         for (DIRECTION direction : MoveCalculatorHelper.diagonals) {
-            listSquares.addAll(MoveCalculatorHelper.calculateDiagonal(direction, currentSquare.getPosition(), currentSquare.getPiece().getColour(), board));
+            listSquares.addAll(MoveCalculatorHelper.calculateDiagonal(direction, currentSquare.getPosition(), board));
         }
         return listSquares;
     }
