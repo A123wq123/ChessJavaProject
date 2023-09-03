@@ -3,9 +3,9 @@ package ChessGameJava.UI;
 import javax.swing.*;
 
 import ChessGameJava.Controller.ChessController;
+import ChessGameJava.Logic.Colour;
 import ChessGameJava.Utility.UiChange;
 import ChessGameJava.Utility.UiChange.PIECENAME;
-import ChessGameJava.Logic.Colour;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -13,9 +13,10 @@ import java.util.ArrayList;
 /**
  * Class representing the chess board on the User Interface side of this project.
  * This class is capable of loading a chess game with the basic pieces in place
- * as well as add a new square of piece if such is desired.
+ * as well as add a new square or piece if such is desired.
+ * 
  * @Author Charles Degrandpré
- * @Last_Updated 2022-12-23
+ * @Last_Updated 2023-09-03
  */
 public class ChessBoardUI extends JFrame{
 
@@ -30,7 +31,7 @@ public class ChessBoardUI extends JFrame{
      * images.
      */
     public ChessBoardUI() {
-        super(); // Create the JFrame.
+        super(); 
         super.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         super.setSize(450, 450);
         super.setTitle("ChessGame");
@@ -46,13 +47,14 @@ public class ChessBoardUI extends JFrame{
     /**
      * This method is in charge of taking an ArrayList<UiCHange> and make the necessary
      * changes on the Ui of the application. 
+     * 
      * @param changes The ArrayList<UiChange> to make the changes for. 
      */
     public void makeChanges(ArrayList<UiChange> changes) {
         this.listSquares.forEach(square -> square.removeHighlight());
 
         for(UiChange change: changes) {
-            ChessSquareUI square = this.getSquareUI(change.getPosition().getCoordY(), change.getPosition().getCoordX());
+            ChessSquareUI square = this.getSquareUI(change.getPosition().getCoordX(), change.getPosition().getCoordY());
             
             if(change.getIsHighlightedMove()) {
                 square.highlight();
@@ -65,7 +67,8 @@ public class ChessBoardUI extends JFrame{
 
     /**
      * Function in charge of mapping a provided PIECENAME and a Colour to a given string representing that piece. 
-     * @param pieceName The PIECENAME associate to the peice. Ex: KING, ROOK, QUEEN etc...
+     * 
+     * @param pieceName The PIECENAME associated to the piece. Ex: KING, ROOK, QUEEN etc...
      * @param colour The Colour of the piece. 
      * @return The string representing the given piece. 
      */
@@ -84,7 +87,7 @@ public class ChessBoardUI extends JFrame{
             case PAWN:
                 return colour == Colour.BLACK ? "\u265F" : "\u2659";
             case NULL:
-                return null;
+                return "";
         }
         return "";
     }
@@ -119,24 +122,24 @@ public class ChessBoardUI extends JFrame{
     private void addWhitePieces() {
         // Add Pawns
         for (int i = 0; i < numberOfRows; i++) {
-            getSquareUI(6, i).setText(this.getPieceName(PIECENAME.PAWN, Colour.WHITE));
+            getSquareUI(i, 6).setText(this.getPieceName(PIECENAME.PAWN, Colour.WHITE));
         }
         // Add towers
         for (int i  = 0; i < 2; i++) {
-            getSquareUI(7, i*7).setText(this.getPieceName(PIECENAME.ROOK, Colour.WHITE));
+            getSquareUI(i*7, 7).setText(this.getPieceName(PIECENAME.ROOK, Colour.WHITE));
         }
         // Add knights
         for (int i  = 0; i < 2; i++) {
-            getSquareUI(7, 1+i*5).setText(this.getPieceName(PIECENAME.KNIGHT, Colour.WHITE));
+            getSquareUI(1+i*5, 7).setText(this.getPieceName(PIECENAME.KNIGHT, Colour.WHITE));
         }
         // Add bishops
         for (int i  = 0; i < 2; i++) {
-            getSquareUI(7, 2+i*3).setText(this.getPieceName(PIECENAME.BISHOP, Colour.WHITE));
+            getSquareUI(2+i*3, 7).setText(this.getPieceName(PIECENAME.BISHOP, Colour.WHITE));
         }
         // Add queen
-        getSquareUI(7,3).setText(this.getPieceName(PIECENAME.QUEEN, Colour.WHITE));
+        getSquareUI(3, 7).setText(this.getPieceName(PIECENAME.QUEEN, Colour.WHITE));
         // Add king
-        getSquareUI(7,4).setText(this.getPieceName(PIECENAME.KING, Colour.WHITE));
+        getSquareUI(4, 7).setText(this.getPieceName(PIECENAME.KING, Colour.WHITE));
     }
 
     /**
@@ -146,33 +149,34 @@ public class ChessBoardUI extends JFrame{
     private void addBlackPieces() {
         // Add Pawns
         for (int i = 0; i < numberOfRows; i++) {
-            getSquareUI(1, i).setText(this.getPieceName(PIECENAME.PAWN, Colour.BLACK));
+            getSquareUI(i, 1).setText(this.getPieceName(PIECENAME.PAWN, Colour.BLACK));
         }
         // Add towers
         for (int i  = 0; i < 2; i++) {
-            getSquareUI(0, i*7).setText(this.getPieceName(PIECENAME.ROOK, Colour.BLACK));
+            getSquareUI(i*7, 0).setText(this.getPieceName(PIECENAME.ROOK, Colour.BLACK));
         }
         // Add knights
         for (int i  = 0; i < 2; i++) {
-            getSquareUI(0, 1+i*5).setText(this.getPieceName(PIECENAME.KNIGHT, Colour.BLACK));
+            getSquareUI(1+i*5, 0).setText(this.getPieceName(PIECENAME.KNIGHT, Colour.BLACK));
         }
         // Add bishops
         for (int i  = 0; i < 2; i++) {
-            getSquareUI(0, 2+i*3).setText(this.getPieceName(PIECENAME.BISHOP, Colour.BLACK));
+            getSquareUI(2+i*3, 0).setText(this.getPieceName(PIECENAME.BISHOP, Colour.BLACK));
         }
         // Add queen
-        getSquareUI(0,3).setText(this.getPieceName(PIECENAME.QUEEN, Colour.BLACK));
+        getSquareUI(3, 0).setText(this.getPieceName(PIECENAME.QUEEN, Colour.BLACK));
         // Add king
-        getSquareUI(0,4).setText(this.getPieceName(PIECENAME.KING, Colour.BLACK));
+        getSquareUI(4, 0).setText(this.getPieceName(PIECENAME.KING, Colour.BLACK));
     }
 
     /**
      * Returns a square from the ChessBoardUI instance by its given coordinates.
-     * @param row the row of the square, also its y coordinate.
+     * 
      * @param column the column of the square, also its x coordinate.
-     * @return the square associated with the given coordinates.
+     * @param row the row of the square, also its y coordinate.
+     * @return the ChessSquareUI associated with the given coordinates.
      */
-    private ChessSquareUI getSquareUI(int row, int column) {
+    private ChessSquareUI getSquareUI(int column, int row) {
         int index = numberOfRows * row + column;
         return listSquares.get(index);
     }
