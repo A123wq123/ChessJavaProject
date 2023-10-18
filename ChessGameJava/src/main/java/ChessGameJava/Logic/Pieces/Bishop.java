@@ -23,7 +23,7 @@ public class Bishop extends ChessABSPieceModel{
      * @param colourOfPiece the colour of the bishop.
      */
     public Bishop(Colour colourOfPiece) {
-        this.colour = colourOfPiece;
+        super(colourOfPiece);
     }
 
     /**

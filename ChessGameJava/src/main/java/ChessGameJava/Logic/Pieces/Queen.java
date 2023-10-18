@@ -22,8 +22,9 @@ public class Queen extends ChessABSPieceModel {
      * @param colourOfPiece the colour of the queen.
      */
     public Queen(Colour colourOfPiece) {
-        this.colour = colourOfPiece;
+        super(colourOfPiece);
     }
+
 
     /**
      * Method used to return all the squares a queen can attack. A queen can attack all 

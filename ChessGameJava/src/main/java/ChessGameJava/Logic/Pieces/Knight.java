@@ -23,8 +23,9 @@ public class Knight extends ChessABSPieceModel {
      * @param colourOfPiece the colour of the knight.
      */
     public Knight(Colour colourOfPiece) {
-        this.colour = colourOfPiece;
+        super(colourOfPiece);
     }
+
 
     /**
      * Method used to return all the squares a knight can attack. A knight can attack all all 

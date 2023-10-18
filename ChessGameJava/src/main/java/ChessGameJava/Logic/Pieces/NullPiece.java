@@ -28,8 +28,9 @@ public class NullPiece extends ChessABSPieceModel {
      * be considered empty. 
      */
     public NullPiece() {
-        this.colour = Colour.NULL;
+        super(Colour.NULL);
     }
+
 
     /**
      * Method used to return the list of squares a NullPiece may attack. Always

@@ -35,6 +35,13 @@ public abstract class ChessABSPieceModel {
     public Colour getColour() {
         return this.colour;
     }
+    /**
+     * simple constructor to initialise the color of the piece
+     * @param myColour the colour of the piece created 
+     */
+    protected ChessABSPieceModel(Colour myColour){
+        this.colour=myColour;
+    }
 
     /**
      * Returns all the possibles moves the piece can make by receiving its square current

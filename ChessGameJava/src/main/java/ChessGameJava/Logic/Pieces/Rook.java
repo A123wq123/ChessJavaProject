@@ -23,8 +23,9 @@ public class Rook extends ChessABSPieceModel {
      * @param colourOfPiece the colour of the rook.
      */
     public Rook(Colour colourOfPiece) {
-        this.colour = colourOfPiece;
+        super(colourOfPiece);
     }
+
 
     /**
      * Method used to return all the squares a rook can attack. A rook can attack all squares

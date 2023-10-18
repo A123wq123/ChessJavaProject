@@ -29,8 +29,9 @@ public class Pawn extends ChessABSPieceModel{
      * @param colourOfPiece the colour of the Pawn.
      */
     public Pawn(Colour colourOfPiece) {
-        this.colour = colourOfPiece;
+        super(colourOfPiece);
     }
+
 
     /**
      * Returns all the possible moves a pawn can do. These moves include any 

@@ -25,7 +25,7 @@ public class King extends ChessABSPieceModel {
      * @param colourOfPiece the colour of the king.
      */
     public King(Colour colourOfPiece) {
-        this.colour = colourOfPiece;
+        super(colourOfPiece);
     }
 
     /**
